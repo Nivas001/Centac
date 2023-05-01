@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/Home/Pages/Functions/Merit%20Mark%20calculation/Merit_mark.dart';
 import 'package:login/Home/Pages/Home.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Neet%20Login/bottom.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         'home' :(context) => Home_page(),
         'login': (context) => Login(),
         'neet_page' : (context) => bottom(),
+        'merit_mark' : (context) => Merit_mark(),
 
       },
     );
