@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,6 +16,26 @@ class _Merit_markState extends State<Merit_mark> {
   final biology = TextEditingController();
   final physics = TextEditingController();
   final chemistry = TextEditingController();
+
+  late String language1 = language.text;
+  late int lang = int.parse(language1);
+
+  late String eng1 = english.text;
+  late int eng = int.parse(eng1);
+
+  late String maths1 = maths.text;
+  late int mat = int.parse(maths1);
+
+  late String bio1 = biology.text;
+  late int bio = int.parse(bio1);
+
+  late String phy1 = physics.text;
+  late int phy = int.parse(phy1);
+
+  late String che1 = chemistry.text;
+  late int che = int.parse(che1);
+
+  late int total = lang + eng + mat + bio + phy + che;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +78,27 @@ class _Merit_markState extends State<Merit_mark> {
                   cont_subject: biology,
                   subject: 'Biology',
                 ),
-                ElevatedButton(onPressed: (){}, child: Text('Calculate'))
+                ElevatedButton(
+                    onPressed: () {
+                      print(total);
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: Text('Merit mark'),
+                              content: new Text('$total'),
+                              actions: [
+                                new CupertinoDialogAction(
+                                  child: new Text('ok'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            );
+                          });
+                    },
+                    child: Text('Calculate'))
               ],
             ),
           ],

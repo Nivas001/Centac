@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/Home/login.dart';
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -135,7 +136,10 @@ class _Home_pageState extends State<Home_page> {
                             ),
                             MaterialButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, 'login');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()));
                               },
                               child: Text(
                                 'Dashboard',
@@ -219,7 +223,6 @@ class _Home_pageState extends State<Home_page> {
           ),
         ),
       ),
-
     );
   }
 }

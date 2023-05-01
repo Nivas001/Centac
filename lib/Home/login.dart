@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login/Neet%20Login/bottom.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,7 +11,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   final username = TextEditingController();
   final _password = TextEditingController();
 
@@ -130,15 +130,15 @@ class _LoginState extends State<Login> {
           ),
           ElevatedButton(
             onPressed: () async {
-              try{
-              final user = await _auth.signInWithEmailAndPassword(
-                  email: username.text, password: _password.text);
+              try {
+                final user = await _auth.signInWithEmailAndPassword(
+                    email: username.text, password: _password.text);
                 if (user != null) {
-                  Navigator.pushNamed(context, 'neet_page');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => bottom()));
                 }
               } catch (e) {
                 print(e);
-
               }
 
               // print(username.text);
