@@ -2,13 +2,9 @@ import 'package:login/Neet Login/Pages/Dashboard.dart';
 import 'package:login/Neet Login/Pages/Notification.dart';
 import 'package:login/Neet Login/Pages/Settings.dart';
 import 'package:login/Neet Login/Pages/User.dart';
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'Pages/Notification.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class bottom extends StatefulWidget {

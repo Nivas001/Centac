@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login/Home.dart';
+import 'package:login/Home/Pages/Home.dart';
+import 'package:login/Home/home_bottom.dart';
 import 'package:login/Neet%20Login/bottom.dart';
 
-import 'login.dart';
+import 'Home/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async{
@@ -21,8 +22,9 @@ class MyApp extends StatelessWidget {
      // home: Home_page(),
       debugShowCheckedModeBanner: false,
 
-      initialRoute: 'home',
+      initialRoute: 'bottom',
       routes: {
+        'bottom' : (context) => Home_bottom(),
         'home' :(context) => Home_page(),
         'login': (context) => Login(),
         'neet_page' : (context) => bottom(),
