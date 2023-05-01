@@ -37,6 +37,9 @@ class _Merit_markState extends State<Merit_mark> {
 
   late int total = lang + eng + mat + bio + phy + che;
 
+  late String tot = total.toString();
+  late double per = total/6;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -86,7 +89,7 @@ class _Merit_markState extends State<Merit_mark> {
                           builder: (context) {
                             return CupertinoAlertDialog(
                               title: Text('Merit mark'),
-                              content: new Text('$total'),
+                              content: new Text('Total : $total \nPercentage : $per'),
                               actions: [
                                 new CupertinoDialogAction(
                                   child: new Text('ok'),
