@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         'home' :(context) => Home_page(),
         'login': (context) => Login(),
         'neet_page' : (context) => bottom(),
-        'merit_mark' : (context) => Merit_mark(),
+        'merit_mark' : (context) => Commerce(),
 
       },
     );
