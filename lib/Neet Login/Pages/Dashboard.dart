@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Home/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'dart:convert';
 
@@ -16,18 +18,56 @@ class _Dash_neetState extends State<Dash_neet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print('$auth');
+    db();
+    //print('$auth');
   }
 
-  final auth = FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      final String uid = user.uid;
-      print('User id : $uid');
-      print('User is signed in!');
-    }
-  });
+
+  // final auth = FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  //   if (user == null) {
+  //     print('User is currently signed out!');
+  //   } else {
+  //     final String uid = user.uid;
+  //     print('User id : $uid');
+  //
+  //     print('User is signed in!');
+  //   }
+  // });
+
+  //final cloud = FirebaseFirestore.instance.collection("users").doc('Name');
+
+
+
+  void db() async{
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
+    final user = FirebaseAuth.instance.currentUser;
+    if(user != null)
+      {
+        final uid = user.uid;
+        print('User id : $uid');
+
+        final documentSnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        final name = documentSnapshot.get('Name');
+        String? name1 ;
+        name1 = name;
+        final email = documentSnapshot.get('Mail');
+        final age = documentSnapshot.get('Age');
+        print('Name : $name');
+
+        print('Mail : $email');
+        print('Age : $age');
+      }
+    else
+      {
+        print('No User Found');
+      }
+  }
+
+
+
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;
   late User? user = auth1.currentUser;
@@ -150,6 +190,7 @@ class _Dash_neetState extends State<Dash_neet> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+         // Text('Name :$name1'),
           SizedBox(
             height: 30.0,
           ),
