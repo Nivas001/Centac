@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Home/login.dart';
@@ -6,12 +7,31 @@ import 'dart:convert';
 
 class Dash_neet extends StatefulWidget {
   const Dash_neet({Key? key}) : super(key: key);
-
   @override
   State<Dash_neet> createState() => _Dash_neetState();
 }
 
 class _Dash_neetState extends State<Dash_neet> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('$auth');
+  }
+
+  final auth = FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      final String uid = user.uid;
+      print('User id : $uid');
+      print('User is signed in!');
+    }
+  });
+
+  final FirebaseAuth auth1 = FirebaseAuth.instance;
+  late User? user = auth1.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
