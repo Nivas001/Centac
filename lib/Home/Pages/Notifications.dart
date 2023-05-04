@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
-
 
 
 class Home_notification extends StatefulWidget {
@@ -16,6 +14,19 @@ class _Home_notificationState extends State<Home_notification> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Notifications',
+            style: TextStyle(
+                fontFamily: 'Cinzel',
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.0,
+              color: Colors.purple,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.amber.shade300,
+        ),
         body: Center(
           child: Text(
             'Notifications',

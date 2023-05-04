@@ -3,13 +3,17 @@ import 'package:login/Home/Pages/Functions/Merit%20Mark%20calculation/Merit_mark
 import 'package:login/Home/Pages/Home.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Neet%20Login/bottom.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Home/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print('Token :$fcmToken');
   runApp(const MyApp());
 }
 
