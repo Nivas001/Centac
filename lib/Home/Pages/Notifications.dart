@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:login/Home/Pages/Functions/ShowingNotification.dart';
 
 
 class Home_notification extends StatefulWidget {
@@ -27,12 +28,14 @@ class _Home_notificationState extends State<Home_notification> {
           centerTitle: true,
           backgroundColor: Colors.amber.shade300,
         ),
-        body: Center(
-          child: Text(
-            'Notifications',
-            style: TextStyle(fontFamily: 'Cinzel'),
-          ),
-        ),
+        // body: Center(
+        //   child: Text(
+        //     'Notifications',
+        //     style: TextStyle(fontFamily: 'Cinzel'),
+        //   ),
+        // ),
+
+          body: ShowingNotification(),
       ),
     );
   }
