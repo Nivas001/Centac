@@ -39,37 +39,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Merit Mark Calculation'),
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: Text(
+                      'Drawer Header',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('Biology'),
+                    selected: _selectedItem == 0,
+                    onTap: () => _onItemSelected(0),
+                  ),
+                  ListTile(
+                    title: Text('Computer Science'),
+                    selected: _selectedItem == 1,
+                    onTap: () => _onItemSelected(1),
+                  ),
+                  ListTile(
+                    title: Text('Commerce'),
+                    selected: _selectedItem == 2,
+                    onTap: () => _onItemSelected(2),
+                  ),
+                ],
               ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Biology'),
-              selected: _selectedItem == 0,
-              onTap: () => _onItemSelected(0),
-            ),
-            ListTile(
-              title: Text('Computer Science'),
-              selected: _selectedItem == 1,
-              onTap: () => _onItemSelected(1),
-            ),
-            ListTile(
-              title: Text('Commerce'),
-              selected: _selectedItem == 2,
-              onTap: () => _onItemSelected(2),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: _pages[_selectedItem],
@@ -119,6 +125,7 @@ class _BiologyState extends State<Biology> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Biology :',
@@ -234,6 +241,7 @@ class _ComputerScienceState extends State<ComputerScience> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Computer Science :',
@@ -348,6 +356,7 @@ class _CommerceState extends State<Commerce> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Commerce :',
