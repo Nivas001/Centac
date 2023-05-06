@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'dart:convert';
 
+
 class Dash_neet extends StatefulWidget {
   const Dash_neet({Key? key}) : super(key: key);
   @override
@@ -14,11 +15,13 @@ class Dash_neet extends StatefulWidget {
 }
 
 class _Dash_neetState extends State<Dash_neet> {
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    db();
+    dbtest();
+
     //print('$auth');
   }
 
@@ -38,32 +41,54 @@ class _Dash_neetState extends State<Dash_neet> {
 
 
 
-  void db() async{
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+  // void db() async{
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   await Firebase.initializeApp();
+  //
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   if(user != null)
+  //     {
+  //       final uid = user.uid;
+  //       print('User id : $uid');
+  //
+  //       final documentSnapshot =
+  //       await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  //       final name = documentSnapshot.get('Name');
+  //       String? name1 ;
+  //       name1 = name;
+  //       final email = documentSnapshot.get('Mail');
+  //       final age = documentSnapshot.get('Age');
+  //       print('Name : $name');
+  //
+  //       print('Mail : $email');
+  //       print('Age : $age');
+  //     }
+  //   else
+  //     {
+  //       print('No User Found');
+  //     }
+  // }
 
+
+   dbtest() async{
     final user = FirebaseAuth.instance.currentUser;
-    if(user != null)
-      {
-        final uid = user.uid;
-        print('User id : $uid');
+    final uid = user?.uid;
+    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
 
-        final documentSnapshot =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
-        final name = documentSnapshot.get('Name');
-        String? name1 ;
-        name1 = name;
-        final email = documentSnapshot.get('Mail');
-        final age = documentSnapshot.get('Age');
-        print('Name : $name');
+    // Retreive the data for the user's document in uid
+    final documentSnapshot = await docRef.get();
 
-        print('Mail : $email');
-        print('Age : $age');
-      }
-    else
-      {
-        print('No User Found');
-      }
+    //Access the feilds
+    final name = documentSnapshot.get('Name');
+    final age = documentSnapshot.get('Age');
+    final gender = documentSnapshot.get('Gender');
+    final phone = documentSnapshot.get('Phone');
+    final mail = documentSnapshot.get('Mail');
+    print('Name :$name');
+    print('Age : $age');
+    print('Gender : $gender');
+    print('Phone : $phone');
+    print('Mail : $mail');
   }
 
 
@@ -79,7 +104,7 @@ class _Dash_neetState extends State<Dash_neet> {
         centerTitle: true,
         backgroundColor: Colors.deepPurple[300],
         title: const Text(
-          'DASHBOARD',
+          'DASHBOARD ',
           style: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 16.0,
@@ -190,7 +215,16 @@ class _Dash_neetState extends State<Dash_neet> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         // Text('Name :$name1'),
+          FutureBuilder(
+            future: dbtest(),
+            builder: (context, snapshot){
+              if(snapshot.connectionState != ConnectionState.done)
+                return Text('Loading data!!');
+              return Text('hi');
+              //return Text('Name : $name');
+            },
+          ),
+          //Text('$name'),
           SizedBox(
             height: 30.0,
           ),

@@ -40,6 +40,9 @@ dependencies:
   awesome_notifications: ^0.7.4+1
   flutter_local_notifications: ^14.0.0+1
   firebase_database: ^10.1.1
+  modal_progress_hud_nsn: ^0.3.0
+  blurry_modal_progress_hud: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:
