@@ -28,6 +28,7 @@ class _Home_notificationState extends State<Home_notification> {
           centerTitle: true,
           backgroundColor: Colors.amber.shade300,
         ),
+        body: ListView()
         // body: Center(
         //   child: Text(
         //     'Notifications',
@@ -35,7 +36,7 @@ class _Home_notificationState extends State<Home_notification> {
         //   ),
         // ),
 
-          body: ShowingNotification(),
+          //body: ShowingNotification(),
       ),
     );
   }

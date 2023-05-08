@@ -20,7 +20,7 @@ class _Dash_neetState extends State<Dash_neet> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    dbtest();
+    //dbtest();
 
     //print('$auth');
   }
@@ -70,32 +70,44 @@ class _Dash_neetState extends State<Dash_neet> {
   // }
 
 
-   dbtest() async{
-    final user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
-
-    // Retreive the data for the user's document in uid
-    final documentSnapshot = await docRef.get();
-
-    //Access the feilds
-    final name = documentSnapshot.get('Name');
-    final age = documentSnapshot.get('Age');
-    final gender = documentSnapshot.get('Gender');
-    final phone = documentSnapshot.get('Phone');
-    final mail = documentSnapshot.get('Mail');
-    print('Name :$name');
-    print('Age : $age');
-    print('Gender : $gender');
-    print('Phone : $phone');
-    print('Mail : $mail');
-  }
-
-
-
-
-  final FirebaseAuth auth1 = FirebaseAuth.instance;
-  late User? user = auth1.currentUser;
+  //  dbtest() async{
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   final uid = user?.uid;
+  //   final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+  //
+  //   // Retreive the data for the user's document in uid
+  //   final documentSnapshot = await docRef.get();
+  //
+  //   //Access the feilds
+  //   final name = documentSnapshot.get('Name');
+  //   final age = documentSnapshot.get('Age');
+  //   final gender = documentSnapshot.get('Gender');
+  //   final phone = documentSnapshot.get('Phone');
+  //   final mail = documentSnapshot.get('Mail');
+  //   final address = documentSnapshot.get('Address');
+  //   final religion = documentSnapshot.get('Religion');
+  //   final board = documentSnapshot.get('Board');
+  //   final region = documentSnapshot.get('Region');
+  //   final pin = documentSnapshot.get('Pincode');
+  //  // final f_name = documentSnapshot.get('Father name');
+  //   print('Name :$name');
+  //   //print('Father name : $f_name');
+  //   print('Age : $age');
+  //   print('Gender : $gender');
+  //   print('Phone : $phone');
+  //   print('Mail : $mail');
+  //   print('Address : $address');
+  //   print('Religion : $religion');
+  //   print('Board : $board');
+  //   print('Region : $region');
+  //   print('Pincode : $pin');
+  // }
+  //
+  //
+  //
+  //
+  // final FirebaseAuth auth1 = FirebaseAuth.instance;
+  // late User? user = auth1.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -215,15 +227,15 @@ class _Dash_neetState extends State<Dash_neet> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          FutureBuilder(
-            future: dbtest(),
-            builder: (context, snapshot){
-              if(snapshot.connectionState != ConnectionState.done)
-                return Text('Loading data!!');
-              return Text('hi');
-              //return Text('Name : $name');
-            },
-          ),
+          // FutureBuilder(
+          //   future: dbtest(),
+          //   builder: (context, snapshot){
+          //     if(snapshot.connectionState != ConnectionState.done)
+          //       return Text('Loading data!!');
+          //     return Text('hi');
+          //     //return Text('Name : $name');
+          //   },
+          // ),
           //Text('$name'),
           SizedBox(
             height: 30.0,

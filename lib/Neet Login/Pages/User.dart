@@ -6,24 +6,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 //User? user = FirebaseAuth.instance.currentUser;
 
-class User extends StatefulWidget {
-  const User({Key? key}) : super(key: key);
+class User1 extends StatefulWidget {
+  const User1({Key? key}) : super(key: key);
 
   @override
-  State<User> createState() => _UserState();
+  State<User1> createState() => _User1State();
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-
-class _UserState extends State<User> {
+class _User1State extends State<User1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('User details'),),
+      body: Center(
+        child: Text('User details'),
+      ),
     );
   }
 }

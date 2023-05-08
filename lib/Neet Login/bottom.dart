@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class bottom extends StatefulWidget {
   const bottom({Key? key}) : super(key: key);
@@ -27,8 +29,8 @@ class _bottomState extends State<bottom> {
   final List<Widget> _pages = [
     Dash_neet(),
     Notifications(),
-    User(),
-    Settings(),
+    User1(),
+    Settings1(),
   ];
 
   List <Color> colours = [
@@ -39,6 +41,54 @@ class _bottomState extends State<bottom> {
   ];
 
   @override
+
+  dbtest() async{
+    final user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+
+    // Retreive the data for the user's document in uid
+    final documentSnapshot = await docRef.get();
+
+    //Access the feilds
+    final name = documentSnapshot.get('Name');
+    final age = documentSnapshot.get('Age');
+    final gender = documentSnapshot.get('Gender');
+    final phone = documentSnapshot.get('Phone');
+    final mail = documentSnapshot.get('Mail');
+    final address = documentSnapshot.get('Address');
+    final religion = documentSnapshot.get('Religion');
+    final board = documentSnapshot.get('Board');
+    final region = documentSnapshot.get('Region');
+    final pin = documentSnapshot.get('Pincode');
+    // final f_name = documentSnapshot.get('Father name');
+    print('Name :$name');
+    //print('Father name : $f_name');
+    print('Age : $age');
+    print('Gender : $gender');
+    print('Phone : $phone');
+    print('Mail : $mail');
+    print('Address : $address');
+    print('Religion : $religion');
+    print('Board : $board');
+    print('Region : $region');
+    print('Pincode : $pin');
+  }
+
+
+
+
+  final FirebaseAuth auth1 = FirebaseAuth.instance;
+  late User? user = auth1.currentUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dbtest();
+  }
+
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
