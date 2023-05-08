@@ -13,18 +13,19 @@ class User1 extends StatefulWidget {
   State<User1> createState() => _User1State();
 }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
 class _User1State extends State<User1> {
   @override
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('User details'),
+        child: Column(
+          children: [
+
+          ],
+        )
       ),
     );
   }
