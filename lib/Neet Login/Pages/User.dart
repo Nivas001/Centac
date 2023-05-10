@@ -37,6 +37,8 @@ class _User1State extends State<User1> {
   int phone = 0;
   String gender = '';
   String religion = '';
+  String image = '';
+  String father_name = '';
 
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -61,6 +63,8 @@ class _User1State extends State<User1> {
         pin = data['Pincode'];
         religion = data['Religion'];
         phone = data['Phone'];
+        image = data['Image'];
+        father_name = data['Fname'];
       });
     } else {
       setState(() {
@@ -75,6 +79,8 @@ class _User1State extends State<User1> {
         pin = 0;
         religion = '';
         phone = 0;
+        image = '';
+        father_name = '';
       });
     }
   }
@@ -93,29 +99,73 @@ class _User1State extends State<User1> {
         elevation: 0.0,
       ),
       body: SafeArea(
-        child: Center(
-            child: Container(
-              decoration: BoxDecoration(
-
+        child: ListView(
+          children : [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 13.0,),
+              Center(
+                child: CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: NetworkImage('$image'),
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-              Text('Name : $name'),
-              Text('RegNo : $regno'),
-              Text('Address : $address'),
-              Text('Mail : $mail'),
-              Text('Board : $board'),
-              Text('Nation : $nation'),
-              Text('Age : $age'),
-              Text('Gender : $gender'),
-              Text('Pincode : $pin'),
-              Text('Religion : $religion'),
-              Text('Phone : $phone'),
-          ],
+              ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Name'),
+                subtitle: Text('$name'),
+              ),
+              ListTile(
+                leading : Icon(Icons.numbers_outlined),
+                title: Text('Application No.'),
+                subtitle: Text('$regno'),
+              ),
+              ListTile(
+                leading : Icon(Icons.access_time_rounded),
+                title: Text('Age'),
+                subtitle: Text('$age'),
+              ),
+              ListTile(
+                leading : Icon(Icons.person_2_rounded),
+                title: Text('Applicant Father\'s name'),
+                subtitle: Text('$father_name'),
+              ),
+              ListTile(
+                leading : Icon(Icons.phone),
+                title: Text('Phone no.'),
+                subtitle: Text('$phone'),
+              ),
+              ListTile(
+                leading : Icon(Icons.email_outlined),
+                title: Text('Email'),
+                subtitle: Text('$mail'),
+              ),
+
+              ListTile(
+                leading : Icon(Icons.favorite_rounded),
+                title: Text('Nation'),
+                subtitle: Text('$nation'),
+              ),
+              ListTile(
+                leading : Icon(Icons.add_circle_sharp),
+                title: Text('Religion'),
+                subtitle: Text('$religion'),
+              ),
+              ListTile(
+                leading : Icon(Icons.place),
+                title: Text('Address'),
+                subtitle: Text('$address'),
+              ),
+              ListTile(
+                leading : Icon(Icons.pin_drop),
+                title: Text('Pincode'),
+                subtitle: Text('$pin'),
+              ),
+            ],
+          ),
+      ],
         ),
-            )),
       ),
     );
   }
