@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/main.dart';
+import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:login/Home/Pages/Functions/Merit%20Mark%20calculation/Merit_mark.dart';
 
 class Home_settings extends StatefulWidget {
@@ -30,8 +33,8 @@ class _Home_settingsState extends State<Home_settings> {
               ListTile(
                 leading: Icon(Icons.help),
                 title: Text(
-                  'Struck on calculating the Merit Mark? Click here to Calculate the mark',
-                  style: TextStyle(fontFamily: 'Cinzel'),
+                  'Calculate Merit mark',
+                  style: TextStyle(fontFamily: 'Poppins'),
                 ),
                 onTap: () {
                   setState(() {
@@ -42,6 +45,20 @@ class _Home_settingsState extends State<Home_settings> {
                       ),
                     );
                   });
+                },
+              ),
+              ListTile(
+                leading : Icon(Icons.info),
+                title : Text(
+                  'General Info',style: TextStyle(fontFamily: 'Poppins'),
+                ),
+                onTap: ()async{
+                  const url = 'https://www.google.com';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
                 },
               )
             ],
