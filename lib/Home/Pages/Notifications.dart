@@ -12,7 +12,7 @@ class Home_notification extends StatefulWidget {
 
 class _Home_notificationState extends State<Home_notification> {
   @override
-  Widget build(BuildContext context)
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
