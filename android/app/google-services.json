@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "467372865937",
+    "firebase_url": "https://centac-b36d6-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "centac-b36d6",
     "storage_bucket": "centac-b36d6.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467372865937:android:15d72875e89bfe2c144230",
+        "android_client_info": {
+          "package_name": "co.centac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467372865937-qokcfojbc2fgkij5f3jrkeumb97kvubq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgf7KIvqALFJLbTmPgsEhlATetIg0JRcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467372865937-qokcfojbc2fgkij5f3jrkeumb97kvubq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:467372865937:android:7643e8c57773de66144230",
