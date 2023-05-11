@@ -39,39 +39,35 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('Merit Mark Calculation'),
       ),
       drawer: Drawer(
-        child: Column(
-          children: [
-            ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Text(
-                    'Drawer Header',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
                 ),
-                ListTile(
-                  title: Text('Biology'),
-                  selected: _selectedItem == 0,
-                  onTap: () => _onItemSelected(0),
-                ),
-                ListTile(
-                  title: Text('Computer Science'),
-                  selected: _selectedItem == 1,
-                  onTap: () => _onItemSelected(1),
-                ),
-                ListTile(
-                  title: Text('Commerce'),
-                  selected: _selectedItem == 2,
-                  onTap: () => _onItemSelected(2),
-                ),
-              ],
+              ),
+            ),
+            ListTile(
+              title: Text('Biology'),
+              selected: _selectedItem == 0,
+              onTap: () => _onItemSelected(0),
+            ),
+            ListTile(
+              title: Text('Computer Science'),
+              selected: _selectedItem == 1,
+              onTap: () => _onItemSelected(1),
+            ),
+            ListTile(
+              title: Text('Commerce'),
+              selected: _selectedItem == 2,
+              onTap: () => _onItemSelected(2),
             ),
           ],
         ),
@@ -89,41 +85,72 @@ class Biology extends StatefulWidget {
 }
 
 class _BiologyState extends State<Biology> {
-  final language = TextEditingController();
-  final english = TextEditingController();
-  final maths = TextEditingController();
-  final biology = TextEditingController();
-  final physics = TextEditingController();
-  final chemistry = TextEditingController();
 
-  late String language1 = language.text;
-  late int lang = int.parse(language1);
+  final TextEditingController language = TextEditingController();
+  final TextEditingController english = TextEditingController();
+  final TextEditingController maths = TextEditingController();
+  final TextEditingController physics = TextEditingController();
+  final TextEditingController chemistry = TextEditingController();
+  final TextEditingController biology = TextEditingController();
 
-  late String eng1 = english.text;
-  late int eng = int.parse(eng1);
+  double calMeritMark() {
+    List<double> langmark = [
+      double.parse(language.text),
+      double.parse(english.text),
+    ];
 
-  late String maths1 = maths.text;
-  late int mat = int.parse(maths1);
+    List<double> mainSubMarks = [
+      double.parse(maths.text),
+      double.parse(physics.text),
+      double.parse(chemistry.text),
+      double.parse(biology.text),
+    ];
 
-  late String bio1 = biology.text;
-  late int bio = int.parse(bio1);
+    double langMeritMark = langmark.reduce((a, b) => a > b ? a : b);
 
-  late String phy1 = physics.text;
-  late int phy = int.parse(phy1);
+    mainSubMarks.sort();
+    double mainSubMeritMark = mainSubMarks.sublist(1).reduce((a, b) => a + b);
 
-  late String che1 = chemistry.text;
-  late int che = int.parse(che1);
+    double meritMark = ((langMeritMark + mainSubMeritMark) / 400) * 100;
 
-  late int total = lang + eng + mat + bio + phy + che;
+    return meritMark;
+  }
 
-  late String tot = total.toString();
-  late double per = total/6;
+  // final language = TextEditingController();
+  // final english = TextEditingController();
+  // final maths = TextEditingController();
+  // final biology = TextEditingController();
+  // final physics = TextEditingController();
+  // final chemistry = TextEditingController();
+  //
+  // late String language1 = language.text;
+  // late int lang = int.parse(language1);
+  //
+  // late String eng1 = english.text;
+  // late int eng = int.parse(eng1);
+  //
+  // late String maths1 = maths.text;
+  // late int mat = int.parse(maths1);
+  //
+  // late String bio1 = biology.text;
+  // late int bio = int.parse(bio1);
+  //
+  // late String phy1 = physics.text;
+  // late int phy = int.parse(phy1);
+  //
+  // late String che1 = chemistry.text;
+  // late int che = int.parse(che1);
+  //
+  // late int total = lang + eng + mat + bio + phy + che;
+  //
+  // late String tot = total.toString();
+  // late double per = total / 6;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Biology :',
@@ -132,70 +159,72 @@ class _BiologyState extends State<Biology> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),*/
-        body: ListView(
-          children: [
-            Column(
-              children: [
-                Text('Biology :'),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextInput(
-                  cont_subject: language,
-                  subject: 'Language',
-                ),
-                TextInput(
-                  cont_subject: english,
-                  subject: 'English',
-                ),
-                TextInput(
-                  cont_subject: maths,
-                  subject: 'Maths',
-                ),
-                TextInput(
-                  cont_subject: physics,
-                  subject: 'Physics',
-                ),
-                TextInput(
-                  cont_subject: chemistry,
-                  subject: 'Chemistry',
-                ),
-                TextInput(
-                  cont_subject: biology,
-                  subject: 'Biology',
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      print(total);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CupertinoAlertDialog(
-                              title: Text('Merit mark'),
-                              content: new Text('Total : $total \nPercentage : $per'),
-                              actions: [
-                                new CupertinoDialogAction(
-                                  child: new Text('ok'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          });
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: language,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Tamil'),
+              ),
+              TextField(
+                controller: english,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'English'),
+              ),
+              TextField(
+                controller: maths,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Maths'),
+              ),
+              TextField(
+                controller: physics,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Physics'),
+              ),
+              TextField(
+                controller: chemistry,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Chemistry'),
+              ),
+              TextField(
+                controller: biology,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Biology'),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  double meritMark = calMeritMark();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Merit Mark'),
+                        content:
+                        Text('The calculated merit mark is: $meritMark'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
                     },
-                    child: Text('Calculate'))
+                  );
+                },
+                child: Text('Calculate'),
+              ),
               ],
             ),
-          ],
+
         ),
       ),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-
 
 class ComputerScience extends StatefulWidget {
   const ComputerScience({Key? key}) : super(key: key);
@@ -205,41 +234,71 @@ class ComputerScience extends StatefulWidget {
 }
 
 class _ComputerScienceState extends State<ComputerScience> {
-  final language = TextEditingController();
-  final english = TextEditingController();
-  final maths = TextEditingController();
-  final compsci = TextEditingController();
-  final physics = TextEditingController();
-  final chemistry = TextEditingController();
+  final TextEditingController language = TextEditingController();
+  final TextEditingController english = TextEditingController();
+  final TextEditingController maths = TextEditingController();
+  final TextEditingController physics = TextEditingController();
+  final TextEditingController chemistry = TextEditingController();
+  final TextEditingController compsci = TextEditingController();
 
-  late String language1 = language.text;
-  late int lang = int.parse(language1);
+  double calMeritMark() {
+    List<double> langmark = [
+      double.parse(language.text),
+      double.parse(english.text),
+    ];
 
-  late String eng1 = english.text;
-  late int eng = int.parse(eng1);
+    List<double> mainSubMarks = [
+      double.parse(maths.text),
+      double.parse(physics.text),
+      double.parse(chemistry.text),
+      double.parse(compsci.text),
+    ];
 
-  late String maths1 = maths.text;
-  late int mat = int.parse(maths1);
+    double langMeritMark = langmark.reduce((a, b) => a > b ? a : b);
 
-  late String cs1 = compsci.text;
-  late int cs = int.parse(cs1);
+    mainSubMarks.sort();
+    double mainSubMeritMark = mainSubMarks.sublist(1).reduce((a, b) => a + b);
 
-  late String phy1 = physics.text;
-  late int phy = int.parse(phy1);
+    double meritMark = ((langMeritMark + mainSubMeritMark) / 400) * 100;
 
-  late String che1 = chemistry.text;
-  late int che = int.parse(che1);
+    return meritMark;
+  }
 
-  late int total = lang + eng + mat + cs + phy + che;
-
-  late String tot = total.toString();
-  late double per = total/6;
+  // final language = TextEditingController();
+  // final english = TextEditingController();
+  // final maths = TextEditingController();
+  // final compsci = TextEditingController();
+  // final physics = TextEditingController();
+  // final chemistry = TextEditingController();
+  //
+  // late String language1 = language.text;
+  // late int lang = int.parse(language1);
+  //
+  // late String eng1 = english.text;
+  // late int eng = int.parse(eng1);
+  //
+  // late String maths1 = maths.text;
+  // late int mat = int.parse(maths1);
+  //
+  // late String cs1 = compsci.text;
+  // late int cs = int.parse(cs1);
+  //
+  // late String phy1 = physics.text;
+  // late int phy = int.parse(phy1);
+  //
+  // late String che1 = chemistry.text;
+  // late int che = int.parse(che1);
+  //
+  // late int total = lang + eng + mat + cs + phy + che;
+  //
+  // late String tot = total.toString();
+  // late double per = total / 6;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Computer Science :',
@@ -248,69 +307,71 @@ class _ComputerScienceState extends State<ComputerScience> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),*/
-        body: ListView(
-          children: [
-            Column(
-              children: [
-                Text('Computer Science :'),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextInput(
-                  cont_subject: language,
-                  subject: 'Language',
-                ),
-                TextInput(
-                  cont_subject: english,
-                  subject: 'English',
-                ),
-                TextInput(
-                  cont_subject: maths,
-                  subject: 'Maths',
-                ),
-                TextInput(
-                  cont_subject: physics,
-                  subject: 'Physics',
-                ),
-                TextInput(
-                  cont_subject: chemistry,
-                  subject: 'Chemistry',
-                ),
-                TextInput(
-                  cont_subject: compsci,
-                  subject: 'Computer Science',
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      print(total);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CupertinoAlertDialog(
-                              title: Text('Merit mark'),
-                              content: new Text('Total : $total \nPercentage : $per'),
-                              actions: [
-                                new CupertinoDialogAction(
-                                  child: new Text('ok'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          });
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: language,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Tamil'),
+              ),
+              TextField(
+                controller: english,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'English'),
+              ),
+              TextField(
+                controller: maths,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Maths'),
+              ),
+              TextField(
+                controller: physics,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Physics'),
+              ),
+              TextField(
+                controller: chemistry,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Chemistry'),
+              ),
+              TextField(
+                controller: compsci,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Computer Science'),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  double meritMark = calMeritMark();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Merit Mark'),
+                        content:
+                            Text('The calculated merit mark is: $meritMark'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
                     },
-                    child: Text('Calculate'))
-              ],
-            ),
-          ],
+                  );
+                },
+                child: Text('Calculate'),
+              ),
+            ],
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
 
 class Commerce extends StatefulWidget {
   const Commerce({Key? key}) : super(key: key);
@@ -320,41 +381,64 @@ class Commerce extends StatefulWidget {
 }
 
 class _CommerceState extends State<Commerce> {
-  final language = TextEditingController();
-  final english = TextEditingController();
-  final Accounting = TextEditingController();
-  final Economics = TextEditingController();
-  final Commerce = TextEditingController();
-  final ComputerApp = TextEditingController();
+  final TextEditingController language = TextEditingController();
+  final TextEditingController english = TextEditingController();
+  final TextEditingController Accounting = TextEditingController();
+  final TextEditingController Economics = TextEditingController();
+  final TextEditingController Commerce = TextEditingController();
+  final TextEditingController ComputerApp = TextEditingController();
 
-  late String language1 = language.text;
-  late int lang = int.parse(language1);
+  double calMeritMark() {
+    List<double> langmark = [
+      double.parse(language.text),
+      double.parse(english.text),
+    ];
 
-  late String eng1 = english.text;
-  late int eng = int.parse(eng1);
+    List<double> mainSubMarks = [
+      double.parse(Accounting.text),
+      double.parse(Economics.text),
+      double.parse(Commerce.text),
+      double.parse(ComputerApp.text),
+    ];
 
-  late String acc1 = Accounting.text;
-  late int acc = int.parse(acc1);
+    double langMeritMark = langmark.reduce((a, b) => a > b ? a : b);
 
-  late String ca1 = ComputerApp.text;
-  late int ca = int.parse(ca1);
+    mainSubMarks.sort();
+    double mainSubMeritMark = mainSubMarks.sublist(1).reduce((a, b) => a + b);
 
-  late String eco1 = Economics.text;
-  late int eco = int.parse(eco1);
+    double meritMark = ((langMeritMark + mainSubMeritMark) / 400) * 100;
 
-  late String comm1 = Commerce.text;
-  late int comm = int.parse(comm1);
+    return meritMark;
+  }
 
-  late int total = lang + eng + acc + ca + eco + comm;
-
-  late String tot = total.toString();
-  late double per = total/6;
+  // late String language1 = language.text;
+  // late int lang = int.parse(language1);
+  //
+  // late String eng1 = english.text;
+  // late int eng = int.parse(eng1);
+  //
+  // late String acc1 = Accounting.text;
+  // late int acc = int.parse(acc1);
+  //
+  // late String ca1 = ComputerApp.text;
+  // late int ca = int.parse(ca1);
+  //
+  // late String eco1 = Economics.text;
+  // late int eco = int.parse(eco1);
+  //
+  // late String comm1 = Commerce.text;
+  // late int comm = int.parse(comm1);
+  //
+  // late int total = lang + eng + acc + ca + eco + comm;
+  //
+  // late String tot = total.toString();
+  // late double per = total/6;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: false,
         /*appBar: AppBar(
           title: Text(
             'Commerce :',
@@ -363,62 +447,65 @@ class _CommerceState extends State<Commerce> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),*/
-        body: ListView(
-          children: [
-            Column(
-              children: [
-                Text('Commerce :'),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextInput(
-                  cont_subject: language,
-                  subject: 'Language',
-                ),
-                TextInput(
-                  cont_subject: english,
-                  subject: 'English',
-                ),
-                TextInput(
-                  cont_subject: Accounting,
-                  subject: 'Accounts',
-                ),
-                TextInput(
-                  cont_subject: Economics,
-                  subject: 'Economics',
-                ),
-                TextInput(
-                  cont_subject: Commerce,
-                  subject: 'Commerce',
-                ),
-                TextInput(
-                  cont_subject: ComputerApp,
-                  subject: 'Computer Applications',
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      print(total);
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CupertinoAlertDialog(
-                              title: Text('Merit mark'),
-                              content: new Text('Total : $total \nPercentage : $per'),
-                              actions: [
-                                new CupertinoDialogAction(
-                                  child: new Text('ok'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          });
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: language,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Tamil'),
+              ),
+              TextField(
+                controller: english,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'English'),
+              ),
+              TextField(
+                controller: Accounting,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Accounting'),
+              ),
+              TextField(
+                controller: Economics,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Economics'),
+              ),
+              TextField(
+                controller: Commerce,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Commerce'),
+              ),
+              TextField(
+                controller: ComputerApp,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: 'Computer Applications'),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  double meritMark = calMeritMark();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Merit Mark'),
+                        content:
+                            Text('The calculated merit mark is: $meritMark'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
                     },
-                    child: Text('Calculate'))
-              ],
-            ),
-          ],
+                  );
+                },
+                child: Text('Calculate'),
+              ),
+            ],
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,
