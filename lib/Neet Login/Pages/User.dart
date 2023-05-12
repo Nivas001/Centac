@@ -92,27 +92,27 @@ class _User1State extends State<User1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //   'User details',
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontFamily: 'Cinzel',
-        //       fontWeight: FontWeight.bold,
-        //
-        //   ),
-        // ),
-        title: GradientText(
-          'User Details',
+        title: Text(
+          'User details',
           style: TextStyle(
-            fontFamily: 'Cinzel',
-            fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontFamily: 'Cinzel',
+              fontWeight: FontWeight.bold,
+
           ),
-          colors: [
-            Colors.pinkAccent,
-            Colors.red,
-            Colors.deepPurple,
-          ],
         ),
+        // title: GradientText(
+        //   'User Details',
+        //   style: TextStyle(
+        //     fontFamily: 'Cinzel',
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        //   colors: [
+        //     Colors.pinkAccent,
+        //     Colors.red,
+        //     Colors.deepPurple,
+        //   ],
+        // ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -248,6 +248,24 @@ class _User1State extends State<User1> {
                         leading: Icon(Icons.email_outlined),
                         title: Text('Email', style: BoldPoppins()),
                         subtitle: Text('$mail', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                            BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.school),
+                        title: Text('Board', style: BoldPoppins()),
+                        subtitle: Text('$board', style: RegularPoppins()),
                       ),
                     ),
                     clipper: ClipperCircleBorder(),
