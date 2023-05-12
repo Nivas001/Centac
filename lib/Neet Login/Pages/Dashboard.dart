@@ -229,8 +229,23 @@ class _Dash_neetState extends State<Dash_neet> {
           SizedBox(
             height: 5.0,
           ),
-          Text('Name : $name'),
-          Text('Reg. No : $regno'),
+          Container(
+            width: 350.0,
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+            //color: Colors.grey,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.purple),
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            child: Column(
+
+              children: [
+                Text('Name : $name',style: TextStyle(fontFamily: 'Poppins'),),
+                Text('Reg. No : $regno',style: TextStyle(fontFamily: 'Poppins'),),
+              ],
+            ),
+          ),
+
           SizedBox(
             height: 30.0,
           ),

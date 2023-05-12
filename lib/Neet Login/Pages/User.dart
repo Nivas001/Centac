@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:login/Neet%20Login/Pages/Extras/ViewMarks.dart';
 import '../../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -21,7 +22,6 @@ class _User1State extends State<User1> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     print('Bottom User : $userstream');
     dbtest();
@@ -104,7 +104,8 @@ class _User1State extends State<User1> {
         title: GradientText(
           'User Details',
           style: TextStyle(
-            fontFamily: 'Cinzel',fontWeight: FontWeight.bold,
+            fontFamily: 'Cinzel',
+            fontWeight: FontWeight.bold,
           ),
           colors: [
             Colors.pinkAccent,
@@ -324,6 +325,31 @@ class _User1State extends State<User1> {
                     clipper: ClipperCircleBorder(),
                   ),
                 ),
+
+                // TODO : Make a box to enter into a module to view marks
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          left: BorderSide(color: Colors.amber, width: 6),
+                        ),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.percent_rounded),
+                        title: Text('View Marks',style: BoldPoppins(),),
+                        subtitle: Text('Need to view your marks ? Click here',style: RegularPoppins(),),
+                        trailing: Icon(Icons.ads_click_rounded),
+                        onTap: (){
+                          setState(() {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewMarks()));
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ],
