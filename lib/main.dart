@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData.light(),
      //home: Home_page(),
-      home: isLogin? Dash_neet() :Home_bottom() ,
+      home: isLogin? bottom() :Home_bottom() ,
       debugShowCheckedModeBanner: false,
 
       //initialRoute: 'bottom',
