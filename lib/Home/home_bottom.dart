@@ -20,6 +20,9 @@ class _Home_bottomState extends State<Home_bottom> {
     Home_notification(),
     Home_settings(),
   ];
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

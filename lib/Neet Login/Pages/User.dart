@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 //User? user = FirebaseAuth.instance.currentUser;
 
@@ -91,82 +92,253 @@ class _User1State extends State<User1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'User details',
-          style: TextStyle(color: Colors.black),
+        // title: Text(
+        //   'User details',
+        //   style: TextStyle(
+        //       color: Colors.black,
+        //       fontFamily: 'Cinzel',
+        //       fontWeight: FontWeight.bold,
+        //
+        //   ),
+        // ),
+        title: GradientText(
+          'User Details',
+          style: TextStyle(
+            fontFamily: 'Cinzel',fontWeight: FontWeight.bold,
+          ),
+          colors: [
+            Colors.pinkAccent,
+            Colors.red,
+            Colors.deepPurple,
+          ],
         ),
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
       body: SafeArea(
         child: ListView(
-          children : [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 13.0,),
-              Center(
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: NetworkImage('$image'),
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 13.0,
                 ),
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text('Name'),
-                subtitle: Text('$name'),
-              ),
-              ListTile(
-                leading : Icon(Icons.numbers_outlined),
-                title: Text('Application No.'),
-                subtitle: Text('$regno'),
-              ),
-              ListTile(
-                leading : Icon(Icons.access_time_rounded),
-                title: Text('Age'),
-                subtitle: Text('$age'),
-              ),
-              ListTile(
-                leading : Icon(Icons.person_2_rounded),
-                title: Text('Applicant Father\'s name'),
-                subtitle: Text('$father_name'),
-              ),
-              ListTile(
-                leading : Icon(Icons.phone),
-                title: Text('Phone no.'),
-                subtitle: Text('$phone'),
-              ),
-              ListTile(
-                leading : Icon(Icons.email_outlined),
-                title: Text('Email'),
-                subtitle: Text('$mail'),
-              ),
-
-              ListTile(
-                leading : Icon(Icons.favorite_rounded),
-                title: Text('Nation'),
-                subtitle: Text('$nation'),
-              ),
-              ListTile(
-                leading : Icon(Icons.add_circle_sharp),
-                title: Text('Religion'),
-                subtitle: Text('$religion'),
-              ),
-              ListTile(
-                leading : Icon(Icons.place),
-                title: Text('Address'),
-                subtitle: Text('$address'),
-              ),
-              ListTile(
-                leading : Icon(Icons.pin_drop),
-                title: Text('Pincode'),
-                subtitle: Text('$pin'),
-              ),
-            ],
-          ),
-      ],
+                Center(
+                  child: CircleAvatar(
+                    radius: 50.0,
+                    backgroundImage: NetworkImage('$image'),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.account_circle),
+                        title: Text('Name', style: BoldPoppins()),
+                        subtitle: Text(
+                          '$name',
+                          style: RegularPoppins(),
+                        ),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left: BorderSide(
+                                color: Colors.greenAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.numbers_outlined),
+                        title: Text(
+                          'Application No.',
+                          style: BoldPoppins(),
+                        ),
+                        subtitle: Text(
+                          '$regno',
+                          style: RegularPoppins(),
+                        ),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.access_time_rounded),
+                        title: Text('Age', style: BoldPoppins()),
+                        subtitle: Text(
+                          '$age',
+                          style: RegularPoppins(),
+                        ),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.person_2_rounded),
+                        title: Text('Applicant Father\'s name',
+                            style: BoldPoppins()),
+                        subtitle: Text('$father_name', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text('Phone no.', style: BoldPoppins()),
+                        subtitle: Text('$phone', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.email_outlined),
+                        title: Text('Email', style: BoldPoppins()),
+                        subtitle: Text('$mail', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.favorite_rounded),
+                        title: Text('Nation', style: BoldPoppins()),
+                        subtitle: Text('$nation', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.add_circle_sharp),
+                        title: Text('Religion', style: BoldPoppins()),
+                        subtitle: Text('$religion', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.place),
+                        title: Text('Address', style: BoldPoppins()),
+                        subtitle: Text('$address', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
+                                BorderSide(color: Colors.pinkAccent, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.pin_drop),
+                        title: Text('Pincode', style: BoldPoppins()),
+                        subtitle: Text('$pin', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  TextStyle RegularPoppins() => TextStyle(fontFamily: 'Poppins');
+
+  TextStyle BoldPoppins() =>
+      TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold);
+
+  ShapeBorderClipper ClipperCircleBorder() {
+    return ShapeBorderClipper(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)));
   }
 }

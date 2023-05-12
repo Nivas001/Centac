@@ -25,10 +25,7 @@ class Ugneet_notification extends StatefulWidget {
 }
 
 class _Ugneet_notificationState extends State<Ugneet_notification> {
-  bool ShowUgNeet = false;
-  bool All = true;
-  bool ShowUgNonNeet = false;
-  bool imp = false;
+
 
   void getData() async {
     Response response = await get(
