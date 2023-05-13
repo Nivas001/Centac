@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:login/Home/Pages/Settings.dart';
+import 'package:login/Home/home_bottom.dart';
 
 class Merit_mark extends StatelessWidget {
   @override
@@ -37,6 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Merit Mark Calculation'),
+       actions: [
+         IconButton(onPressed: (){
+           setState(() {
+             Navigator.push(
+               context,
+               MaterialPageRoute(builder: (context)=> Home_bottom())
+             );
+           });
+         }, icon: Icon(Icons.arrow_back_ios))
+       ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -166,7 +178,7 @@ class _BiologyState extends State<Biology> {
               TextField(
                 controller: language,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Tamil'),
+                decoration: InputDecoration(labelText: 'Language'),
               ),
               TextField(
                 controller: english,
@@ -314,7 +326,7 @@ class _ComputerScienceState extends State<ComputerScience> {
               TextField(
                 controller: language,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Tamil'),
+                decoration: InputDecoration(labelText: 'Language'),
               ),
               TextField(
                 controller: english,
@@ -454,7 +466,7 @@ class _CommerceState extends State<Commerce> {
               TextField(
                 controller: language,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Tamil'),
+                decoration: InputDecoration(labelText: 'Language'),
               ),
               TextField(
                 controller: english,
