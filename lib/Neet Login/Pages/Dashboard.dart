@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Home/login.dart';
+import 'package:login/Neet%20Login/Pages/Extras/Verification.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -27,6 +28,7 @@ class _Dash_neetState extends State<Dash_neet> {
     super.initState();
     print('Bottom User : $userstream');
     dbtest();
+    dbStatus();
     //dbCheck();
 
     //print('$auth');
@@ -77,7 +79,14 @@ class _Dash_neetState extends State<Dash_neet> {
   String address = '';
   String regno = '';
 
+  String academy = '';
+  String residence = '';
+  String caste = '';
+  String category = '';
+  var verifistatus = '';
+
   bool clicked = false;
+  bool visible = true;
 
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -106,6 +115,56 @@ class _Dash_neetState extends State<Dash_neet> {
     }
   }
 
+  dbStatus() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final docRef = FirebaseFirestore.instance.collection('Status').doc(uid);
+
+    // Retreive the data for the user's document in uid
+    final documentSnapshot = await docRef.get();
+
+    //App data's are pushed here
+    if (documentSnapshot.exists) {
+      final data = documentSnapshot.data();
+      setState(() {
+        academy = data!['Academy'] ?? '';
+        residence = data!['Residence'];
+        caste = data!['Caste'];
+        category = data!['Category'];
+        print(' Academy : $academy');
+        print('Residence : $residence');
+        print('Caste : $caste');
+        print('Category : $category');
+
+        if (academy == 'Success' &&
+            residence == 'Success' &&
+            caste == 'Success' &&
+            category == 'Success') {
+          verifistatus = 'All Documents are verified';
+        } else if (academy != 'Success') {
+          verifistatus = 'Academic marks need to be verified';
+        } else if (residence != 'Success') {
+          verifistatus = 'Residence certificate need to be verified';
+        } else if (caste != 'Success') {
+          verifistatus = 'Caste certificate need to be verified';
+        } else if (category != 'Success') {
+          verifistatus = 'Category section need to be verified';
+        } else {
+          verifistatus = 'Verification status need to be pending';
+        }
+
+        if (verifistatus == 'All Documents are verified') {
+          visible = false;
+        }
+      });
+    } else {
+      academy = '';
+      residence = '';
+      caste = '';
+      category = '';
+    }
+  }
+
   Future<void> _signOut() async {
     await FirebaseAuth.instance.signOut();
     setState(() {
@@ -122,7 +181,7 @@ class _Dash_neetState extends State<Dash_neet> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return false;
       },
       child: Scaffold(
@@ -165,7 +224,14 @@ class _Dash_neetState extends State<Dash_neet> {
                       fontSize: 16.0,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Verification()));
+                    });
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.feed_outlined),
@@ -202,7 +268,7 @@ class _Dash_neetState extends State<Dash_neet> {
                   ),
                   onTap: () {
                     setState(() {
-                      if(clicked == false){
+                      if (clicked == false) {
                         QuickAlert.show(
                           barrierDismissible: true,
                           context: context,
@@ -214,11 +280,7 @@ class _Dash_neetState extends State<Dash_neet> {
                           cancelBtnText: 'No',
                           confirmBtnColor: Colors.green,
                         );
-
-                      }
-                      else{
-
-                      }
+                      } else {}
 
                       // showDialog(
                       //     context: context,
@@ -264,8 +326,10 @@ class _Dash_neetState extends State<Dash_neet> {
                   ),
                   onTap: () {
                     setState(() {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home_bottom()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Home_bottom()));
                     });
                   },
                 ),
@@ -305,6 +369,13 @@ class _Dash_neetState extends State<Dash_neet> {
                   Text(
                     'Reg. No : $regno',
                     style: TextStyle(fontFamily: 'Poppins'),
+                  ),
+                  Visibility(
+                    visible: visible,
+                    child: Text(
+                      'Verification Status Pending',
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                 ],
               ),
