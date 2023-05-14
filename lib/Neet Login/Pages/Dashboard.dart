@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Home/login.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'dart:convert';
@@ -16,7 +18,8 @@ class Dash_neet extends StatefulWidget {
 class _Dash_neetState extends State<Dash_neet> {
   final users = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  final userstream = FirebaseFirestore.instance.collection('users').snapshots();
+  final userstream =
+      FirebaseFirestore.instance.collection('NUsers').snapshots();
 
   @override
   void initState() {
@@ -24,6 +27,7 @@ class _Dash_neetState extends State<Dash_neet> {
     super.initState();
     print('Bottom User : $userstream');
     dbtest();
+    //dbCheck();
 
     //print('$auth');
   }
@@ -73,14 +77,15 @@ class _Dash_neetState extends State<Dash_neet> {
   String address = '';
   String regno = '';
 
+  bool clicked = false;
+
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+    final docRef = FirebaseFirestore.instance.collection('NUsers').doc(uid);
 
     // Retreive the data for the user's document in uid
     final documentSnapshot = await docRef.get();
-
 
     //App data's are pushed here
     if (documentSnapshot.exists) {
@@ -88,12 +93,27 @@ class _Dash_neetState extends State<Dash_neet> {
       setState(() {
         name = data!['Name'] ?? '';
         regno = data['RegNo'];
+        print('Name Check : $name');
       });
     } else {
       setState(() {
         name = '';
+        if (name == '') {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Login()));
+        }
       });
     }
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    });
   }
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;
@@ -178,8 +198,43 @@ class _Dash_neetState extends State<Dash_neet> {
                 ),
                 onTap: () {
                   setState(() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
+                    if(clicked == false){
+                      QuickAlert.show(
+                        barrierDismissible: true,
+                        context: context,
+                        type: QuickAlertType.confirm,
+                        //autoCloseDuration: Duration(seconds: 4),
+                        text: 'Do you want to logout',
+                        confirmBtnText: 'Yes',
+                        onConfirmBtnTap: _signOut,
+                        cancelBtnText: 'No',
+                        confirmBtnColor: Colors.green,
+                      );
+
+                    }
+                    else{
+
+                    }
+
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return AlertDialog(
+                    //         title: Text('Conform Logout',style: TextStyle(fontFamily: 'Poppins'),),
+                    //         content: Text('Do you really want to Logout?'),
+                    //         actions: [
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               _signOut();
+                    //             },
+                    //             child: Text('Yes'),
+                    //           ),
+                    //           TextButton(onPressed: (){
+                    //             Navigator.pop(context);
+                    //           }, child: Text('No'))
+                    //         ],
+                    //       );
+                    //     });
                   });
                 },
               ),
@@ -238,10 +293,15 @@ class _Dash_neetState extends State<Dash_neet> {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Column(
-
               children: [
-                Text('Name : $name',style: TextStyle(fontFamily: 'Poppins'),),
-                Text('Reg. No : $regno',style: TextStyle(fontFamily: 'Poppins'),),
+                Text(
+                  'Name : $name',
+                  style: TextStyle(fontFamily: 'Poppins'),
+                ),
+                Text(
+                  'Reg. No : $regno',
+                  style: TextStyle(fontFamily: 'Poppins'),
+                ),
               ],
             ),
           ),

@@ -118,95 +118,101 @@ class _Ugneet_notificationState extends State<Ugneet_notification> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_sharp),
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            title: Text(
-              'UG Neet',
-              style: TextStyle(
-                fontFamily: 'Cinzel',
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.0,
-                color: Colors.purple,
+      home: WillPopScope(
+        onWillPop: ()async {
+          print('');
+          return false;
+      },
+        child: Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_sharp),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
               ),
+              title: Text(
+                'UG Neet',
+                style: TextStyle(
+                  fontFamily: 'Cinzel',
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0,
+                  color: Colors.purple,
+                ),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.amber.shade300,
             ),
-            centerTitle: true,
-            backgroundColor: Colors.amber.shade300,
-          ),
 
-          body: Container(
-            height: double.infinity,
-            child: Column(
-              children: [
-                SizedBox(height: 10.0,),
+            body: Container(
+              height: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(height: 10.0,),
 
-                FirebaseAnimatedList(
-                    shrinkWrap: true,
-                    query: dbref2,
-                    itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
-                      return Card(
-                        child: ClipPath(
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                  left: BorderSide(color: Colors.greenAccent,width: 5)
+                  FirebaseAnimatedList(
+                      shrinkWrap: true,
+                      query: dbref2,
+                      itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
+                        return Card(
+                          child: ClipPath(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    left: BorderSide(color: Colors.greenAccent,width: 5)
+                                ),
+                              ),
+                              child: ListTile(
+                                title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
+                                onTap: _launchNeet,
                               ),
                             ),
-                            child: ListTile(
-                              title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
-                              onTap: _launchNeet,
-                            ),
+                            clipper: ClipperCircleBorder(),
                           ),
-                          clipper: ClipperCircleBorder(),
-                        ),
-                      );
+                        );
 
-                    }
-                ),
-                FirebaseAnimatedList(
-                    shrinkWrap: true,
-                    query: dbref3,
-                    itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
-                      return Card(
-                        child: ClipPath(
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                  left: BorderSide(color: Colors.greenAccent,width: 5)
+                      }
+                  ),
+                  FirebaseAnimatedList(
+                      shrinkWrap: true,
+                      query: dbref3,
+                      itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
+                        return Card(
+                          child: ClipPath(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    left: BorderSide(color: Colors.greenAccent,width: 5)
+                                ),
+                              ),
+                              child: ListTile(
+                                title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
+                                onTap: _launchNeet1,
                               ),
                             ),
-                            child: ListTile(
-                              title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
-                              onTap: _launchNeet1,
-                            ),
+                            clipper: ClipperCircleBorder(),
                           ),
-                          clipper: ClipperCircleBorder(),
-                        ),
-                      );
+                        );
 
-                    }
-                ),
+                      }
+                  ),
 
 
 
-              ],
-            ),
-          )
-        // body: Center(
-        //   child: Text(
-        //     'Notifications',
-        //     style: TextStyle(fontFamily: 'Cinzel'),
-        //   ),
-        // ),
+                ],
+              ),
+            )
+          // body: Center(
+          //   child: Text(
+          //     'Notifications',
+          //     style: TextStyle(fontFamily: 'Cinzel'),
+          //   ),
+          // ),
 
-        //body: ShowingNotification(),
+          //body: ShowingNotification(),
+        ),
       ),
     );
   }

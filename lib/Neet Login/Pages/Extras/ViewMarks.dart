@@ -56,7 +56,7 @@ class _ViewMarksState extends State<ViewMarks> {
   dbMark() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('marks').doc(uid);
+    final docRef = FirebaseFirestore.instance.collection('NMarks').doc(uid);
 
     final documentSnapshot = await docRef.get();
 

@@ -18,7 +18,7 @@ class User1 extends StatefulWidget {
 class _User1State extends State<User1> {
   final users = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  final userstream = FirebaseFirestore.instance.collection('users').snapshots();
+  final userstream = FirebaseFirestore.instance.collection('NUsers').snapshots();
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _User1State extends State<User1> {
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+    final docRef = FirebaseFirestore.instance.collection('NUsers').doc(uid);
 
     // Retreive the data for the user's document in uid
     final documentSnapshot = await docRef.get();

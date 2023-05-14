@@ -212,7 +212,7 @@ class _BiologyState extends State<Biology> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
+                      return CupertinoAlertDialog(
                         title: Text('Merit Mark'),
                         content:
                         Text('The calculated merit mark is: $meritMark'),
@@ -360,7 +360,7 @@ class _ComputerScienceState extends State<ComputerScience> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
+                      return CupertinoAlertDialog(
                         title: Text('Merit Mark'),
                         content:
                             Text('The calculated merit mark is: $meritMark'),
@@ -500,7 +500,7 @@ class _CommerceState extends State<Commerce> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
+                      return CupertinoAlertDialog(
                         title: Text('Merit Mark'),
                         content:
                             Text('The calculated merit mark is: $meritMark'),
