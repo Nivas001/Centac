@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/Home/login.dart';
 
+import '../../Non-Neet Login/Login/LoginNon.dart';
+
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
 
@@ -205,7 +207,10 @@ class _Home_pageState extends State<Home_page> {
                                 ),
                                 MaterialButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, 'login');
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginNon()));
                                   },
                                   child: Text(
                                     'Dashboard',
