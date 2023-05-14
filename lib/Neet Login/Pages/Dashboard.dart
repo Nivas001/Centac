@@ -121,254 +121,259 @@ class _Dash_neetState extends State<Dash_neet> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple[300],
-        title: const Text(
-          'DASHBOARD ',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 3.0,
-          ),
-        ),
-        elevation: 5.0,
-      ),
-      drawer: Drawer(
-        child: Container(
-          child: ListView(
-            children: [
-              const DrawerHeader(
-                child: Center(
-                  child: Text(
-                    'Centac',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.verified),
-                title: const Text(
-                  'Verification Status',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: const Icon(Icons.feed_outlined),
-                title: const Text(
-                  'Merit List',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: const Icon(Icons.stacked_bar_chart_sharp),
-                title: const Text(
-                  'Allotment Status',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {
-                  setState(() {});
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {
-                  setState(() {
-                    if(clicked == false){
-                      QuickAlert.show(
-                        barrierDismissible: true,
-                        context: context,
-                        type: QuickAlertType.confirm,
-                        //autoCloseDuration: Duration(seconds: 4),
-                        text: 'Do you want to logout',
-                        confirmBtnText: 'Yes',
-                        onConfirmBtnTap: _signOut,
-                        cancelBtnText: 'No',
-                        confirmBtnColor: Colors.green,
-                      );
-
-                    }
-                    else{
-
-                    }
-
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (BuildContext context) {
-                    //       return AlertDialog(
-                    //         title: Text('Conform Logout',style: TextStyle(fontFamily: 'Poppins'),),
-                    //         content: Text('Do you really want to Logout?'),
-                    //         actions: [
-                    //           TextButton(
-                    //             onPressed: () {
-                    //               _signOut();
-                    //             },
-                    //             child: Text('Yes'),
-                    //           ),
-                    //           TextButton(onPressed: (){
-                    //             Navigator.pop(context);
-                    //           }, child: Text('No'))
-                    //         ],
-                    //       );
-                    //     });
-                  });
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.feedback_outlined),
-                title: const Text(
-                  'Feedback',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: const Icon(Icons.home_outlined),
-                title: const Text(
-                  'App Home Page',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                  ),
-                ),
-                onTap: () {
-                  setState(() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home_bottom()));
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // FutureBuilder(
-          //   future: dbtest(),
-          //   builder: (context, snapshot){
-          //     if(snapshot.connectionState != ConnectionState.done)
-          //       return Text('Loading data!!');
-          //     return Text('hi');
-          //     //return Text('Name : $name');
-          //   },
-          // ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Container(
-            width: 350.0,
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            //color: Colors.grey,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.purple),
-              borderRadius: BorderRadius.circular(30.0),
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.deepPurple[300],
+          title: const Text(
+            'DASHBOARD ',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 3.0,
             ),
-            child: Column(
+          ),
+          elevation: 5.0,
+        ),
+        drawer: Drawer(
+          child: Container(
+            child: ListView(
               children: [
-                Text(
-                  'Name : $name',
-                  style: TextStyle(fontFamily: 'Poppins'),
+                const DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      'Centac',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-                Text(
-                  'Reg. No : $regno',
-                  style: TextStyle(fontFamily: 'Poppins'),
+                ListTile(
+                  leading: const Icon(Icons.verified),
+                  title: const Text(
+                    'Verification Status',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onTap: () {},
                 ),
-              ],
-            ),
-          ),
+                ListTile(
+                  leading: const Icon(Icons.feed_outlined),
+                  title: const Text(
+                    'Merit List',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: const Icon(Icons.stacked_bar_chart_sharp),
+                  title: const Text(
+                    'Allotment Status',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onTap: () {
+                    setState(() {});
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onTap: () {
+                    setState(() {
+                      if(clicked == false){
+                        QuickAlert.show(
+                          barrierDismissible: true,
+                          context: context,
+                          type: QuickAlertType.confirm,
+                          //autoCloseDuration: Duration(seconds: 4),
+                          text: 'Do you want to logout',
+                          confirmBtnText: 'Yes',
+                          onConfirmBtnTap: _signOut,
+                          cancelBtnText: 'No',
+                          confirmBtnColor: Colors.green,
+                        );
 
-          SizedBox(
-            height: 30.0,
-          ),
-          Text(
-            'Allotment status',
-            style: SF_bold(),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Text(
-            'Round 1',
-            style: SF_bold(),
-          ),
-          const SizedBox(
-            height: 20.0,
-          ),
-          Center(
-            child: DataTable(
-              dividerThickness: 2.0,
-              dataTextStyle: const TextStyle(
-                fontFamily: 'SF-Compact',
-              ),
-              columns: [
-                DataColumn(
-                  label: Text(
-                    'College Name',
-                    textAlign: TextAlign.center,
-                    style: SF(),
-                  ),
+                      }
+                      else{
+
+                      }
+
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return AlertDialog(
+                      //         title: Text('Conform Logout',style: TextStyle(fontFamily: 'Poppins'),),
+                      //         content: Text('Do you really want to Logout?'),
+                      //         actions: [
+                      //           TextButton(
+                      //             onPressed: () {
+                      //               _signOut();
+                      //             },
+                      //             child: Text('Yes'),
+                      //           ),
+                      //           TextButton(onPressed: (){
+                      //             Navigator.pop(context);
+                      //           }, child: Text('No'))
+                      //         ],
+                      //       );
+                      //     });
+                    });
+                  },
                 ),
-                DataColumn(
-                  label: Text(
-                    'Course allotted',
-                    style: SF(),
+                ListTile(
+                  leading: const Icon(Icons.feedback_outlined),
+                  title: const Text(
+                    'Feedback',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
                   ),
+                  onTap: () {},
                 ),
-                DataColumn(
-                  label: Text(
-                    'Last date',
-                    textAlign: TextAlign.center,
-                    style: SF(),
+                ListTile(
+                  leading: const Icon(Icons.home_outlined),
+                  title: const Text(
+                    'App Home Page',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                    ),
                   ),
-                ),
-              ],
-              rows: const [
-                DataRow(
-                  cells: [
-                    DataCell(
-                      Text('PIMS'),
-                    ),
-                    DataCell(
-                      Text('MBBS'),
-                    ),
-                    DataCell(
-                      Text('24-04-2023'),
-                    ),
-                  ],
+                  onTap: () {
+                    setState(() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Home_bottom()));
+                    });
+                  },
                 ),
               ],
             ),
           ),
-        ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // FutureBuilder(
+            //   future: dbtest(),
+            //   builder: (context, snapshot){
+            //     if(snapshot.connectionState != ConnectionState.done)
+            //       return Text('Loading data!!');
+            //     return Text('hi');
+            //     //return Text('Name : $name');
+            //   },
+            // ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Container(
+              width: 350.0,
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              //color: Colors.grey,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.purple),
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Name : $name',
+                    style: TextStyle(fontFamily: 'Poppins'),
+                  ),
+                  Text(
+                    'Reg. No : $regno',
+                    style: TextStyle(fontFamily: 'Poppins'),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(
+              height: 30.0,
+            ),
+            Text(
+              'Allotment status',
+              style: SF_bold(),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              'Round 1',
+              style: SF_bold(),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Center(
+              child: DataTable(
+                dividerThickness: 2.0,
+                dataTextStyle: const TextStyle(
+                  fontFamily: 'SF-Compact',
+                ),
+                columns: [
+                  DataColumn(
+                    label: Text(
+                      'College Name',
+                      textAlign: TextAlign.center,
+                      style: SF(),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Course allotted',
+                      style: SF(),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Last date',
+                      textAlign: TextAlign.center,
+                      style: SF(),
+                    ),
+                  ),
+                ],
+                rows: const [
+                  DataRow(
+                    cells: [
+                      DataCell(
+                        Text('PIMS'),
+                      ),
+                      DataCell(
+                        Text('MBBS'),
+                      ),
+                      DataCell(
+                        Text('24-04-2023'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

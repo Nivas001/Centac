@@ -134,131 +134,139 @@ class _ViewMarksNonState extends State<ViewMarksNon> {
       });
     }
   }
+  onBack() async{
+    Navigator.pop(context);
+  }
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;
   late User? user = auth1.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text(
-          'View Your Marks',
-          style: BoldPoppins(),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_sharp),
-          onPressed: () {
-            setState(() {
-              Navigator.pop(context);
-            });
-          },
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 25.0,
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'View Your Marks',
+            style: BoldPoppins(),
           ),
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white30,
-              ),
-              child: Text(
-                '    Name : $Name\nApp. no. : $Reg\n   Group : $group',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_sharp),
+            onPressed: () {
+              setState(() {
+                Navigator.pop(context);
+              });
+            },
+          ),
+          centerTitle: true,
+        ),
+        body: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 25.0,
+            ),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white30,
+                ),
+                child: Text(
+                  '    Name : $Name\nApp. no. : $Reg\n   Group : $group',
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          DataTable(
-              dataRowHeight: 70,
-              dividerThickness: 2,
-              columnSpacing: 120.0,
-              columns: [
-                DataColumn(
-                  label: Text('Subject',style: BoldPoppins(),),
-                ),
-                DataColumn(
-                  label: Text('Mark',style: BoldPoppins(),),
-                ),
-              ],
-              rows: [
-                DataRow(cells: [
-                  DataCell(
-                    Text('Language',style: BoldPoppins(),),
+            SizedBox(
+              height: 15,
+            ),
+            DataTable(
+                dataRowHeight: 70,
+                dividerThickness: 2,
+                columnSpacing: 120.0,
+                columns: [
+                  DataColumn(
+                    label: Text('Subject',style: BoldPoppins(),),
                   ),
-                  DataCell(
-                    Text('$Lang'),
+                  DataColumn(
+                    label: Text('Mark',style: BoldPoppins(),),
                   ),
+                ],
+                rows: [
+                  DataRow(cells: [
+                    DataCell(
+                      Text('Language',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$Lang'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('English',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$English'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('$sub1',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$mark1'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('$sub2',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$mark2'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('$sub3',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$mark3'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('$sub4',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$mark4'),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('Total',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$tot\/600',style: BoldPoppins(),),
+                    ),
+                  ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('Percentage',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$per%',style: BoldPoppins(),),
+                    ),
+                  ]),
                 ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('English',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$English'),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('$sub1',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$mark1'),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('$sub2',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$mark2'),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('$sub3',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$mark3'),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('$sub4',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$mark4'),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('Total',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$tot\/600',style: BoldPoppins(),),
-                  ),
-                ]),
-                DataRow(cells: [
-                  DataCell(
-                    Text('Percentage',style: BoldPoppins(),),
-                  ),
-                  DataCell(
-                    Text('$per%',style: BoldPoppins(),),
-                  ),
-                ]),
-              ]),
-        ],
+          ],
+        ),
       ),
     );
   }

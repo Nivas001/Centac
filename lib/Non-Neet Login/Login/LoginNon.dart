@@ -38,7 +38,7 @@ class _LoginNonState extends State<LoginNon> {
             Container(
               margin: EdgeInsets.only(left: 10.0),
               child: const Text(
-                'Melcome Back!!',
+                'UG NON-NEET!!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Gothvetica',

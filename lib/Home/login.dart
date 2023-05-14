@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
         //showSpinner = false;
         print('The back button is pressed');
         Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_bottom()));
-        return false;
+        return true;
       },
       child: Scaffold(
         body: BlurryModalProgressHUD(
