@@ -70,7 +70,7 @@ class _Home_pageState extends State<Home_page> {
                         ),
                         SafeArea(
                           child: Column(
-                            children: const [
+                            children:  [
                               SizedBox(
                                 height: 16.0,
                               ),
@@ -94,15 +94,29 @@ class _Home_pageState extends State<Home_page> {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              Text(
-                                '           CENTRALISED ADMISSION COMMITTEE   '
-                                    '\n                                (CENTAC) 2022-23     ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'SF-Compact',
-                                  fontSize: 16.0,
-                                ),
-                              ),
+                              // Text(
+                              //   '           CENTRALISED ADMISSION COMMITTEE   '
+                              //       '\n                                (CENTAC) 2022-23     ',
+                              //   style: TextStyle(
+                              //     fontWeight: FontWeight.bold,
+                              //     fontFamily: 'SF-Compact',
+                              //     fontSize: 16.0,
+                              //   ),
+                              // ),
+                              Column(
+                                children: [
+                                  Text('CENTRALISED ADMISSION COMMITTEE',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'SF-Compact',
+                                fontSize: 16.0,
+                              ),),
+                                  Text('(CENTAC) 2022-23',style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'SF-Compact',
+                                    fontSize: 16.0,
+                                  ),),
+                                ],
+                              )
                             ],
                           ),
                         ),
