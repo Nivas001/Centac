@@ -13,6 +13,10 @@ import '../../Non-Neet Login/Login/LoginNon.dart';
   double ugnonneetsizebox = 0;
   double sizebox1 = 0;
   double padvalue = 0;
+  double fiveteentext = 0;
+  double tentext = 0;
+  double twelvetext = 0;
+
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -63,6 +67,15 @@ class _Home_pageState extends State<Home_page> {
     padvalue = 0.0091*phoneheight;
     padvalue= padvalue.roundToDouble();
     print(padvalue);
+    fiveteentext = 17.4418 * phonetext;
+    fiveteentext = fiveteentext.roundToDouble();
+    print(fiveteentext);
+    tentext = 11.6279 * phonetext;
+    tentext = tentext.roundToDouble();
+    print(tentext);
+    twelvetext = 13.9534*phonetext;
+    twelvetext = twelvetext.roundToDouble();
+    print(twelvetext);
 
     return Scaffold(
       body: Padding(
@@ -159,64 +172,68 @@ class _Home_pageState extends State<Home_page> {
                       SizedBox(
                         width: 20.0,
                       ),
-                      Container(
-                        height: dashboardcontainer,
-                        width: 180.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.blueGrey.shade200,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'images/pgneet.png',
-                                height: ugneetimage,
-                              ),
-                              SizedBox(
-                                height: padvalue,
-                              ),
-                              const Center(
-                                child: Text(
-                                  'UG-NEET',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15.0,
-                                    color: Color(0xFF1A73E8),
+                      Wrap(
+                        children: [
+                          Container(
+                            height: dashboardcontainer,
+                            width: 180.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.blueGrey.shade200,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'images/pgneet.png',
+                                    height: ugneetimage,
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: padvalue,
+                                  ),
+                                  const Center(
+                                    child: Text(
+                                      'UG-NEET',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15.0,
+                                        color: Color(0xFF1A73E8),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: padvalue,
+                                  ),
+                                  const Text(
+                                    'Medical / Dental / BAMS Ayurveda /'
+                                        ' (B.V.Sc.&A.H. National SS & NRI)',
+                                    style: TextStyle(
+                                      fontFamily: 'SF-Compact',
+                                      fontSize: 12.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ugneetsizebox,
+                                  ),
+                                  MaterialButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
+                                    },
+                                    child: Text(
+                                      'Dashboard',
+                                      style: TextStyle(fontFamily: 'SF-Compact'),
+                                    ),
+                                    color: Colors.deepPurple.shade400,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: padvalue,
-                              ),
-                              const Text(
-                                'Medical / Dental / BAMS Ayurveda /'
-                                    ' (B.V.Sc.&A.H. National SS & NRI)',
-                                style: TextStyle(
-                                  fontFamily: 'SF-Compact',
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                              SizedBox(
-                                height: ugneetsizebox,
-                              ),
-                              MaterialButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()));
-                                },
-                                child: Text(
-                                  'Dashboard',
-                                  style: TextStyle(fontFamily: 'SF-Compact'),
-                                ),
-                                color: Colors.deepPurple.shade400,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                       SizedBox(
                         height: ugneetsizebox,
