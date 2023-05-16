@@ -7,6 +7,8 @@ import '../../Non-Neet Login/Login/LoginNon.dart';
   double imageheight = 0;
   double sizebox = 0;
   double dashboardcontainer = 0;
+  double ugneetimage = 0;
+  double ugnon_neetimage = 0;
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -37,6 +39,12 @@ class _Home_pageState extends State<Home_page> {
     dashboardcontainer = 0.303 *phoneheight;
     dashboardcontainer = dashboardcontainer.roundToDouble();
     print(dashboardcontainer);
+    ugneetimage = 0.1145*phoneheight;
+    ugneetimage = ugneetimage.roundToDouble();
+    print(ugneetimage);
+    ugnon_neetimage = 0.0916*phoneheight;
+    ugnon_neetimage = ugnon_neetimage.roundToDouble();
+    print(ugnon_neetimage);
 
     return Scaffold(
       body: Padding(
@@ -146,7 +154,7 @@ class _Home_pageState extends State<Home_page> {
                             children: [
                               Image.asset(
                                 'images/pgneet.png',
-                                height: 100.0,
+                                height: ugneetimage,
                               ),
                               SizedBox(
                                 height: 8.0,
@@ -213,7 +221,7 @@ class _Home_pageState extends State<Home_page> {
                               // ),
                               Image.asset(
                                 'images/nonneet.png',
-                                height: 80.0,
+                                height: ugnon_neetimage,
                               ),
                               SizedBox(
                                 height: 4.0,
