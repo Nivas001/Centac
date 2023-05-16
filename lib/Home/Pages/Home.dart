@@ -9,6 +9,10 @@ import '../../Non-Neet Login/Login/LoginNon.dart';
   double dashboardcontainer = 0;
   double ugneetimage = 0;
   double ugnon_neetimage = 0;
+  double ugneetsizebox = 0;
+  double ugnonneetsizebox = 0;
+  double sizebox1 = 0;
+  double padvalue = 0;
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -23,8 +27,10 @@ class _Home_pageState extends State<Home_page> {
 
     double phonewidth = MediaQuery.of(context).size.width;
     double phoneheight = MediaQuery.of(context).size.height;
+    double phonetext = MediaQuery.of(context).textScaleFactor;
     print(phonewidth);
     print(phoneheight);
+    print(phonetext);
     phoneheight = phoneheight.roundToDouble();
     print(phoneheight);
     containerheight = 0.137*phoneheight;
@@ -45,6 +51,18 @@ class _Home_pageState extends State<Home_page> {
     ugnon_neetimage = 0.0916*phoneheight;
     ugnon_neetimage = ugnon_neetimage.roundToDouble();
     print(ugnon_neetimage);
+    ugneetsizebox = 0.0286*phoneheight;
+    ugneetsizebox = ugneetsizebox.roundToDouble();
+    print(ugneetsizebox);
+    ugnonneetsizebox = 0.0229*phoneheight;
+    ugnonneetsizebox = ugnonneetsizebox.roundToDouble();
+    print(ugnonneetsizebox);
+    sizebox1 = 0.01145*phoneheight;
+    sizebox1 = sizebox1.roundToDouble();
+    print(sizebox1);
+    padvalue = 0.0091*phoneheight;
+    padvalue= padvalue.roundToDouble();
+    print(padvalue);
 
     return Scaffold(
       body: Padding(
@@ -80,7 +98,7 @@ class _Home_pageState extends State<Home_page> {
                           child: Column(
                             children:  [
                               SizedBox(
-                                height: 16.0,
+                                height: sizebox,
                               ),
                               Text(
                                 'GOVERNMENT OF PUDUCHERRY',
@@ -95,12 +113,12 @@ class _Home_pageState extends State<Home_page> {
                               Text(
                                 'DIRECTORATE OF HIGHER AND TECHNICAL EDUCATION',
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: sizebox,
                                   fontFamily: 'SF-Compact',
                                 ),
                               ),
                               SizedBox(
-                                height: 10.0,
+                                height: sizebox1,
                               ),
                               // Text(
                               //   '           CENTRALISED ADMISSION COMMITTEE   '
@@ -181,7 +199,7 @@ class _Home_pageState extends State<Home_page> {
                                 ),
                               ),
                               SizedBox(
-                                height: 25.0,
+                                height: ugneetsizebox,
                               ),
                               MaterialButton(
                                 onPressed: () {
@@ -249,7 +267,7 @@ class _Home_pageState extends State<Home_page> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20.0,
+                                height: ugnonneetsizebox,
                               ),
                               MaterialButton(
                                 onPressed: () {
