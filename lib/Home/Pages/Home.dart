@@ -172,51 +172,51 @@ class _Home_pageState extends State<Home_page> {
                       SizedBox(
                         width: 20.0,
                       ),
-                      Wrap(
-                        children: [
-                          Container(
-                            height: dashboardcontainer,
-                            width: 180.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.blueGrey.shade200,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'images/pgneet.png',
-                                    height: ugneetimage,
-                                  ),
-                                  SizedBox(
-                                    height: padvalue,
-                                  ),
-                                  const Center(
-                                    child: Text(
-                                      'UG-NEET',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15.0,
-                                        color: Color(0xFF1A73E8),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: padvalue,
-                                  ),
-                                  const Text(
-                                    'Medical / Dental / BAMS Ayurveda /'
-                                        ' (B.V.Sc.&A.H. National SS & NRI)',
+                      FittedBox(
+                        child: Container(
+                          height: dashboardcontainer,
+                          width: 180.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.blueGrey.shade200,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  'images/pgneet.png',
+                                  height: ugneetimage,
+                                ),
+                                SizedBox(
+                                  height: padvalue,
+                                ),
+                                const Center(
+                                  child: Text(
+                                    'UG-NEET',
                                     style: TextStyle(
-                                      fontFamily: 'SF-Compact',
-                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0,
+                                      color: Color(0xFF1A73E8),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ugneetsizebox,
+                                ),
+                                SizedBox(
+                                  height: padvalue,
+                                ),
+                                const Text(
+                                  'Medical / Dental / BAMS Ayurveda /'
+                                      ' (B.V.Sc.&A.H. National SS & NRI)',
+                                  style: TextStyle(
+                                    fontFamily: 'SF-Compact',
+                                    fontSize: 12.0,
                                   ),
-                                  MaterialButton(
+                                ),
+                                SizedBox(
+                                  height: ugneetsizebox,
+                                ),
+                                FittedBox(
+                                  child: MaterialButton(
                                     onPressed: () {
                                       Navigator.push(
                                           context,
@@ -229,11 +229,11 @@ class _Home_pageState extends State<Home_page> {
                                     ),
                                     color: Colors.deepPurple.shade400,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
                       SizedBox(
                         height: ugneetsizebox,
