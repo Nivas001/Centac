@@ -166,14 +166,15 @@ class _Home_pageState extends State<Home_page> {
                 SizedBox(
                   height: 30.0,
                 ),
-                SafeArea(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      FittedBox(
-                        child: Container(
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Container(
                           height: dashboardcontainer,
                           width: 180.0,
                           decoration: BoxDecoration(
@@ -215,95 +216,93 @@ class _Home_pageState extends State<Home_page> {
                                 SizedBox(
                                   height: ugneetsizebox,
                                 ),
-                                FittedBox(
-                                  child: MaterialButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Login()));
-                                    },
-                                    child: Text(
-                                      'Dashboard',
-                                      style: TextStyle(fontFamily: 'SF-Compact'),
-                                    ),
-                                    color: Colors.deepPurple.shade400,
+                                MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()));
+                                  },
+                                  child: Text(
+                                    'Dashboard',
+                                    style: TextStyle(fontFamily: 'SF-Compact'),
                                   ),
+                                  color: Colors.deepPurple.shade400,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: ugneetsizebox,
-                      ),
-                      Container(
-                        height: dashboardcontainer,
-                        width: 180.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.blueGrey.shade200,
+                        SizedBox(
+                          height: ugneetsizebox,
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            children: [
-                              // CircleAvatar(
-                              //   backgroundImage: AssetImage('images/nonneet.png'),
-                              //   radius: 45,
-                              //   backgroundColor: Colors.white,
-                              // ),
-                              Image.asset(
-                                'images/nonneet.png',
-                                height: ugnon_neetimage,
-                              ),
-                              SizedBox(
-                                height: 4.0,
-                              ),
-                              const Center(
-                                child: Text(
-                                  'UG-NON NEET',
-                                  style: TextStyle(
-                                    color: Color(0xFF1A73E8),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15.0,
+                        Container(
+                          height: dashboardcontainer,
+                          width: 180.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.blueGrey.shade200,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              children: [
+                                // CircleAvatar(
+                                //   backgroundImage: AssetImage('images/nonneet.png'),
+                                //   radius: 45,
+                                //   backgroundColor: Colors.white,
+                                // ),
+                                Image.asset(
+                                  'images/nonneet.png',
+                                  height: ugnon_neetimage,
+                                ),
+                                SizedBox(
+                                  height: 4.0,
+                                ),
+                                const Center(
+                                  child: Text(
+                                    'UG-NON NEET',
+                                    style: TextStyle(
+                                      color: Color(0xFF1A73E8),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: padvalue,
-                              ),
-                              const Text(
-                                'B.Tech./ B.Sc. (Hons.) Agri.& Horti./ B.V.Sc.&A.H./'
-                                    ' B.Sc.(Nursing/M.L.T/M.R.I.T)/ B.P.T. /B.Pharm./ '
-                                    'B.A.LLB.& (B.A./ B.Sc./ B.Com./ B.B.A./ B.C.A.) ',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  fontFamily: 'SF-Compact',
+                                SizedBox(
+                                  height: padvalue,
                                 ),
-                              ),
-                              SizedBox(
-                                height: ugnonneetsizebox,
-                              ),
-                              MaterialButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginNon()));
-                                },
-                                child: Text(
-                                  'Dashboard',
-                                  style: TextStyle(fontFamily: 'SF-Compact'),
+                                const Text(
+                                  'B.Tech./ B.Sc. (Hons.) Agri.& Horti./ B.V.Sc.&A.H./'
+                                      ' B.Sc.(Nursing/M.L.T/M.R.I.T)/ B.P.T. /B.Pharm./ '
+                                      'B.A.LLB.& (B.A./ B.Sc./ B.Com./ B.B.A./ B.C.A.) ',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: 'SF-Compact',
+                                  ),
                                 ),
-                                color: Colors.deepPurple.shade400,
-                              ),
-                            ],
+                                SizedBox(
+                                  height: ugnonneetsizebox,
+                                ),
+                                MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginNon()));
+                                  },
+                                  child: Text(
+                                    'Dashboard',
+                                    style: TextStyle(fontFamily: 'SF-Compact'),
+                                  ),
+                                  color: Colors.deepPurple.shade400,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
