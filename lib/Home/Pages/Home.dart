@@ -175,7 +175,7 @@ class _Home_pageState extends State<Home_page> {
                                 height: ugneetimage,
                               ),
                               SizedBox(
-                                height: 8.0,
+                                height: padvalue,
                               ),
                               const Center(
                                 child: Text(
@@ -188,7 +188,7 @@ class _Home_pageState extends State<Home_page> {
                                 ),
                               ),
                               SizedBox(
-                                height: 8.0,
+                                height: padvalue,
                               ),
                               const Text(
                                 'Medical / Dental / BAMS Ayurveda /'
@@ -219,7 +219,7 @@ class _Home_pageState extends State<Home_page> {
                         ),
                       ),
                       SizedBox(
-                        height: 30.0,
+                        height: ugneetsizebox,
                       ),
                       Container(
                         height: dashboardcontainer,
@@ -255,7 +255,7 @@ class _Home_pageState extends State<Home_page> {
                                 ),
                               ),
                               SizedBox(
-                                height: 8.0,
+                                height: padvalue,
                               ),
                               const Text(
                                 'B.Tech./ B.Sc. (Hons.) Agri.& Horti./ B.V.Sc.&A.H./'
