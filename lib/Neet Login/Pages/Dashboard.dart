@@ -17,6 +17,7 @@ class Dash_neet extends StatefulWidget {
 }
 
 class _Dash_neetState extends State<Dash_neet> {
+
   final users = FirebaseAuth.instance.currentUser!.uid.toString();
 
   final userstream =
@@ -29,6 +30,8 @@ class _Dash_neetState extends State<Dash_neet> {
     print('Bottom User : $userstream');
     dbtest();
     dbStatus();
+
+    dbAllot();
     //dbCheck();
 
     //print('$auth');
@@ -79,14 +82,24 @@ class _Dash_neetState extends State<Dash_neet> {
   String address = '';
   String regno = '';
 
+  String clg1 = '';
+  String clggg ='';
+  String clg2 = '';
+  String lastdate = '';
+  String course = '';
+  String status = '';
+  int round = 0;
+
   String academy = '';
   String residence = '';
   String caste = '';
   String category = '';
   var verifistatus = '';
+  Color valid = Colors.green;
 
+
+  
   bool clicked = false;
-  bool visible = true;
 
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -128,34 +141,23 @@ class _Dash_neetState extends State<Dash_neet> {
       final data = documentSnapshot.data();
       setState(() {
         academy = data!['Academy'] ?? '';
-        residence = data!['Residence'];
-        caste = data!['Caste'];
-        category = data!['Category'];
+        residence = data['Residence'];
+        caste = data['Caste'];
+        category = data['Category'];
         print(' Academy : $academy');
         print('Residence : $residence');
         print('Caste : $caste');
         print('Category : $category');
 
-        if (academy == 'Success' &&
-            residence == 'Success' &&
-            caste == 'Success' &&
-            category == 'Success') {
+        if (academy == 'Success' && residence == 'Success' && caste == 'Success' && category == 'Success') {
           verifistatus = 'All Documents are verified';
-        } else if (academy != 'Success') {
-          verifistatus = 'Academic marks need to be verified';
-        } else if (residence != 'Success') {
-          verifistatus = 'Residence certificate need to be verified';
-        } else if (caste != 'Success') {
-          verifistatus = 'Caste certificate need to be verified';
-        } else if (category != 'Success') {
-          verifistatus = 'Category section need to be verified';
-        } else {
+          valid = Colors.green;
+        }
+        else {
           verifistatus = 'Verification status need to be pending';
+          valid = Colors.red;
         }
 
-        if (verifistatus == 'All Documents are verified') {
-          visible = false;
-        }
       });
     } else {
       academy = '';
@@ -163,6 +165,28 @@ class _Dash_neetState extends State<Dash_neet> {
       caste = '';
       category = '';
     }
+  }
+
+  dbAllot() async{
+    final user1 = FirebaseAuth.instance.currentUser;
+    final uid = user1?.uid;
+    final allot = FirebaseFirestore.instance.collection('Allotment').doc(uid);
+
+    final documentSnapshot = await allot.get();
+
+    if(documentSnapshot.exists){
+      final data = documentSnapshot.data();
+      print(data);
+      setState(() {
+        round = data!['Round'] ??'';
+        print(round);
+        clg1 = data['Clgname'];
+        course = data['Course'];
+        lastdate = data['Lastdate'];
+        status = data['Status'];
+      });
+    }
+    
   }
 
   Future<void> _signOut() async {
@@ -180,6 +204,10 @@ class _Dash_neetState extends State<Dash_neet> {
 
   @override
   Widget build(BuildContext context) {
+
+    double phonewidth = MediaQuery.of(context).size.width;
+    print(phonewidth);
+
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -353,7 +381,7 @@ class _Dash_neetState extends State<Dash_neet> {
               height: 5.0,
             ),
             Container(
-              width: 350.0,
+              width: phonewidth-80,
               padding: EdgeInsets.only(left: 10.0, right: 10.0),
               //color: Colors.grey,
               decoration: BoxDecoration(
@@ -371,10 +399,10 @@ class _Dash_neetState extends State<Dash_neet> {
                     style: TextStyle(fontFamily: 'Poppins'),
                   ),
                   Visibility(
-                    visible: visible,
+                    visible: true,
                     child: Text(
-                      'Verification Status Pending',
-                      style: TextStyle(color: Colors.red),
+                      '$verifistatus',
+                      style: TextStyle(color:valid,fontFamily: 'Poppins',fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -385,6 +413,10 @@ class _Dash_neetState extends State<Dash_neet> {
               height: 30.0,
             ),
             Text(
+              'NEET',
+              style: SF_bold(),
+            ),
+            Text(
               'Allotment status',
               style: SF_bold(),
             ),
@@ -392,55 +424,70 @@ class _Dash_neetState extends State<Dash_neet> {
               height: 10.0,
             ),
             Text(
-              'Round 1',
+              'Round $round',
               style: SF_bold(),
             ),
             const SizedBox(
               height: 20.0,
             ),
             Center(
-              child: DataTable(
-                dividerThickness: 2.0,
-                dataTextStyle: const TextStyle(
-                  fontFamily: 'SF-Compact',
+              child: SingleChildScrollView(
+                //scrollDirection: Axis.horizontal,
+                child: DataTable(
+
+                  dividerThickness: 2.0,
+                  columnSpacing: 15,
+                  dataTextStyle: const TextStyle(
+                    fontFamily: 'SF-Compact',
+                  ),
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'College Name',
+                        textAlign: TextAlign.center,
+                        style: SF(),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Course allotted',
+                        style: SF(),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Last date',
+                        textAlign: TextAlign.center,
+                        style: SF(),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Status',
+                        textAlign: TextAlign.center,
+                        style: SF(),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    DataRow(
+                     cells: [
+                       DataCell(
+                         Text('$clg1',style: TextStyle(color: Colors.black),),
+                       ),
+                       DataCell(
+                         Text('$course',style: TextStyle(color: Colors.black),),
+                       ),
+                       DataCell(
+                         Text('$lastdate',style: TextStyle(color: Colors.black),),
+                       ),
+                       DataCell(
+                         Text('$status',style: TextStyle(color: Colors.black),),
+                       ),
+                     ]
+                    ),
+                  ],
                 ),
-                columns: [
-                  DataColumn(
-                    label: Text(
-                      'College Name',
-                      textAlign: TextAlign.center,
-                      style: SF(),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Course allotted',
-                      style: SF(),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Last date',
-                      textAlign: TextAlign.center,
-                      style: SF(),
-                    ),
-                  ),
-                ],
-                rows: const [
-                  DataRow(
-                    cells: [
-                      DataCell(
-                        Text('PIMS'),
-                      ),
-                      DataCell(
-                        Text('MBBS'),
-                      ),
-                      DataCell(
-                        Text('24-04-2023'),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
           ],

@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'dart:convert';
 
+import 'package:login/Neet%20Login/Pages/Extras/Verification.dart';
+
 class Dash_nonneet extends StatefulWidget {
   const Dash_nonneet({Key? key}) : super(key: key);
   @override
@@ -24,6 +26,7 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
     super.initState();
     print('Bottom User : $userstream');
     dbtest();
+    dbStatus();
 
     //print('$auth');
   }
@@ -73,6 +76,13 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
   String address = '';
   String regno = '';
 
+  String academy = '';
+  String residence = '';
+  String caste = '';
+  String category = '';
+  var verifistatus = '';
+  Color valid = Colors.green;
+
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
@@ -80,7 +90,6 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
 
     // Retreive the data for the user's document in uid
     final documentSnapshot = await docRef.get();
-
 
     //App data's are pushed here
     if (documentSnapshot.exists) {
@@ -95,6 +104,48 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
       });
     }
   }
+
+  dbStatus() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final docRef = FirebaseFirestore.instance.collection('Status').doc(uid);
+
+    // Retreive the data for the user's document in uid
+    final documentSnapshot = await docRef.get();
+
+    //App data's are pushed here
+    if (documentSnapshot.exists) {
+      final data = documentSnapshot.data();
+      setState(() {
+        academy = data!['Academy'] ?? '';
+        residence = data['Residence'];
+        caste = data['Caste'];
+        category = data['Category'];
+        print(' Academy : $academy');
+        print('Residence : $residence');
+        print('Caste : $caste');
+        print('Category : $category');
+
+        if (academy == 'Success' &&
+            residence == 'Success' &&
+            caste == 'Success' &&
+            category == 'Success') {
+          verifistatus = 'All Documents are verified';
+          valid = Colors.green;
+        } else {
+          verifistatus = 'Verification status need to be pending';
+          valid = Colors.red;
+        }
+      });
+    } else {
+      academy = '';
+      residence = '';
+      caste = '';
+      category = '';
+    }
+  }
+
+
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;
   late User? user = auth1.currentUser;
@@ -141,7 +192,14 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
                     fontSize: 16.0,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Verification()));
+                  });
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.feed_outlined),
@@ -238,16 +296,32 @@ class _Dash_nonneetState extends State<Dash_nonneet> {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Column(
-
               children: [
-                Text('Name : $name',style: TextStyle(fontFamily: 'Poppins'),),
-                Text('Reg. No : $regno',style: TextStyle(fontFamily: 'Poppins'),),
+                Text(
+                  'Name : $name',
+                  style: TextStyle(fontFamily: 'Poppins'),
+                ),
+                Text(
+                  'Reg. No : $regno',
+                  style: TextStyle(fontFamily: 'Poppins'),
+                ),
+                Text(
+                  '$verifistatus',
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      color: valid,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
 
           SizedBox(
             height: 30.0,
+          ),
+          Text(
+            'UG NON-NEET',
+            style: SF_bold(),
           ),
           Text(
             'Allotment status',

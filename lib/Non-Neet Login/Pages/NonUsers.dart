@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login/Neet%20Login/Pages/Extras/ViewMarks.dart';
+import 'package:login/Non-Neet%20Login/Pages/Extras/NonViewMarks.dart';
 import '../../../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -363,7 +364,7 @@ class _NonUser1State extends State<NonUser1> {
                         trailing: Icon(Icons.ads_click_rounded),
                         onTap: (){
                           setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewMarksNon()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> NonViewMarks()));
                           });
                         },
                       ),

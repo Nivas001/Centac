@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ViewMarks extends StatefulWidget {
-  const ViewMarks({Key? key}) : super(key: key);
+class NonViewMarks extends StatefulWidget {
+  const NonViewMarks({Key? key}) : super(key: key);
 
   @override
-  State<ViewMarks> createState() => _ViewMarksState();
+  State<NonViewMarks> createState() => _NonViewMarksState();
 }
 
-class _ViewMarksState extends State<ViewMarks> {
+class _NonViewMarksState extends State<NonViewMarks> {
 
   String name = '';
   String reg = '';
@@ -35,7 +35,7 @@ class _ViewMarksState extends State<ViewMarks> {
   String sub6 = '';
 
   final users = FirebaseAuth.instance.currentUser!.uid.toString();
-  final userstream = FirebaseFirestore.instance.collection('NMarks').snapshots();
+  final userstream = FirebaseFirestore.instance.collection('marks').snapshots();
 
   @override
   void initState() {
@@ -43,8 +43,7 @@ class _ViewMarksState extends State<ViewMarks> {
     super.initState();
     dbMark();
     dbname();
-    print('Name : ');
-    print('reg : ');
+
   }
 
 
@@ -52,7 +51,7 @@ class _ViewMarksState extends State<ViewMarks> {
   dbMark() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('NMarks').doc(uid);
+    final docRef = FirebaseFirestore.instance.collection('marks').doc(uid);
 
     final documentSnapshot = await docRef.get();
 
@@ -67,7 +66,7 @@ class _ViewMarksState extends State<ViewMarks> {
         sub4 = data['Subject_name_4'];
         sub5 = data['Subject_name_5'];
         sub6 = data['Subject_name_6'];
-        
+
 
         mark1 = data['Subject_mark_1'];
         mark2 = data['Subject_mark_2'];
@@ -88,18 +87,18 @@ class _ViewMarksState extends State<ViewMarks> {
         sub4 = '';
         sub5 = '';
         sub6 = '';
-        
+
         mark1 = 0;
         mark2 = 0;
         mark3 = 0;
         mark4 = 0;
         mark5 = 0;
         mark6 = 0;
-        
+
       });
     }
   }
-  
+
   dbname() async{
     final users = FirebaseAuth.instance.currentUser;
     final uid = users?.uid;
@@ -124,7 +123,7 @@ class _ViewMarksState extends State<ViewMarks> {
     }
 
   }
-  
+
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;
   late User? user = auth1.currentUser;
@@ -154,7 +153,7 @@ class _ViewMarksState extends State<ViewMarks> {
           centerTitle: true,
         ),
         body: Column(
-         // crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 25.0,
@@ -177,26 +176,26 @@ class _ViewMarksState extends State<ViewMarks> {
               height: 15,
             ),
             DataTable(
-              dataRowHeight: 70,
+                dataRowHeight: 70,
                 dividerThickness: 2,
                 columnSpacing: 120.0,
                 columns: [
-              DataColumn(
-                label: Text('Subject',style: BoldPoppins(),),
-              ),
-              DataColumn(
-                label: Text('Mark',style: BoldPoppins(),),
-              ),
-            ],
+                  DataColumn(
+                    label: Text('Subject',style: BoldPoppins(),),
+                  ),
+                  DataColumn(
+                    label: Text('Mark',style: BoldPoppins(),),
+                  ),
+                ],
                 rows: [
-              DataRow(cells: [
-                DataCell(
-                  Text('$sub1',style: BoldPoppins(),),
-                ),
-                DataCell(
-                  Text('$mark1'),
-                ),
-              ]),
+                  DataRow(cells: [
+                    DataCell(
+                      Text('$sub1',style: BoldPoppins(),),
+                    ),
+                    DataCell(
+                      Text('$mark1'),
+                    ),
+                  ]),
                   DataRow(cells: [
                     DataCell(
                       Text('$sub2',style: BoldPoppins(),),
@@ -253,7 +252,7 @@ class _ViewMarksState extends State<ViewMarks> {
                       Text('$percent\%',style: BoldPoppins(),),
                     ),
                   ]),
-            ]),
+                ]),
           ],
         ),
       ),

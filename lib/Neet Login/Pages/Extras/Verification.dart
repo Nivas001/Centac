@@ -11,6 +11,10 @@ class Verification extends StatefulWidget {
 }
 
 class _VerificationState extends State<Verification> {
+
+  String name = '';
+  String reg = '';
+
   String academy = '';
   String residence = '';
   String caste = '';
@@ -43,9 +47,9 @@ class _VerificationState extends State<Verification> {
       final data = documentSnapshot.data();
       setState(() {
         academy = data!['Academy'] ?? '';
-        residence = data!['Residence'];
-        caste = data!['Caste'];
-        category = data!['Category'];
+        residence = data['Residence'];
+        caste = data['Caste'];
+        category = data['Category'];
         print(' Academy : $academy');
         print('Residence : $residence');
         print('Caste : $caste');
@@ -100,11 +104,38 @@ class _VerificationState extends State<Verification> {
     }
   }
 
+  dbname() async{
+    final users = FirebaseAuth.instance.currentUser;
+    final uid = users?.uid;
+    final getname = FirebaseFirestore.instance.collection('NUsers').doc(uid);
+
+    final getusers = await getname.get();
+
+    if(getusers.exists){
+      final datas = getusers.data();
+      //print(datas);
+      setState(() {
+        name = datas!['Name'] ?? '';
+        reg = datas['RegNo'];
+        print(reg);
+      });
+    }
+    else{
+      setState(() {
+        name = '';
+        reg = '';
+      });
+    }
+
+  }
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dbStatus();
+    dbname();
   }
 
   @override
@@ -130,6 +161,9 @@ class _VerificationState extends State<Verification> {
           children: [
             SizedBox(
               height: 25,
+            ),
+            Container(
+              child: Text('App. no : $reg',style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
             ),
             Text(
               'Process',
