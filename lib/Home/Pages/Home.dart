@@ -6,6 +6,7 @@ import '../../Non-Neet Login/Login/LoginNon.dart';
   double containerheight = 0;
   double imageheight = 0;
   double sizebox = 0;
+  double dashboardcontainer = 0;
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -33,6 +34,9 @@ class _Home_pageState extends State<Home_page> {
     sizebox = 0.0137*phoneheight;
     sizebox = sizebox.roundToDouble();
     print(sizebox);
+    dashboardcontainer = 0.303 *phoneheight;
+    dashboardcontainer = dashboardcontainer.roundToDouble();
+    print(dashboardcontainer);
 
     return Scaffold(
       body: Padding(
@@ -116,7 +120,7 @@ class _Home_pageState extends State<Home_page> {
                         width: 20.0,
                       ),
                       Container(
-                        height: 265.0,
+                        height: dashboardcontainer,
                         width: 180.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
@@ -178,7 +182,7 @@ class _Home_pageState extends State<Home_page> {
                         height: 30.0,
                       ),
                       Container(
-                        height: 265.0,
+                        height: dashboardcontainer,
                         width: 180.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
