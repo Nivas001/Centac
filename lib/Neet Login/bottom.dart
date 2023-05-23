@@ -30,7 +30,7 @@ class _bottomState extends State<bottom> {
     Dash_neet(),
     Notifications(),
     User1(),
-    Settings1(),
+
   ];
 
   List <Color> colours = [
@@ -128,10 +128,10 @@ class _bottomState extends State<bottom> {
                   icon: Icons.person,
                   text: 'User',
                 ),
-                GButton(
-                  icon: Icons.settings,
-                  text: 'Settings',
-                ),
+                // GButton(
+                //   icon: Icons.settings,
+                //   text: 'Settings',
+                // ),
               ],
               onTabChange: (index)
               {

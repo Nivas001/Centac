@@ -43,6 +43,7 @@ class _NonViewMarksState extends State<NonViewMarks> {
     super.initState();
     dbMark();
     dbname();
+    dbtest();
 
   }
 
@@ -51,7 +52,7 @@ class _NonViewMarksState extends State<NonViewMarks> {
   dbMark() async {
     final user = FirebaseAuth.instance.currentUser;
     final uid = user?.uid;
-    final docRef = FirebaseFirestore.instance.collection('marks').doc(uid);
+    final docRef = FirebaseFirestore.instance.collection('NMarks').doc(uid);
 
     final documentSnapshot = await docRef.get();
 
@@ -123,6 +124,29 @@ class _NonViewMarksState extends State<NonViewMarks> {
     }
 
   }
+
+  dbtest() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final docRef = FirebaseFirestore.instance.collection('users').doc(uid);
+
+    // Retreive the data for the user's document in uid
+    final documentSnapshot = await docRef.get();
+
+    //App data's are pushed here
+    if (documentSnapshot.exists) {
+      final data = documentSnapshot.data();
+      setState(() {
+        name = data!['Name'] ?? '';
+        reg = data['RegNo'];
+      });
+    } else {
+      setState(() {
+        name = '';
+      });
+    }
+  }
+
 
 
   final FirebaseAuth auth1 = FirebaseAuth.instance;

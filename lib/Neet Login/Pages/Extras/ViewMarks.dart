@@ -43,6 +43,7 @@ class _ViewMarksState extends State<ViewMarks> {
     super.initState();
     dbMark();
     dbname();
+    dbname1();
     print('Name : ');
     print('reg : ');
   }
@@ -104,6 +105,32 @@ class _ViewMarksState extends State<ViewMarks> {
     final users = FirebaseAuth.instance.currentUser;
     final uid = users?.uid;
     final getname = FirebaseFirestore.instance.collection('NUsers').doc(uid);
+
+    final getusers = await getname.get();
+
+    if(getusers.exists){
+      final datas = getusers.data();
+      //print(datas);
+      setState(() {
+        name = datas!['Name'] ?? '';
+        reg = datas['RegNo'];
+        print(reg);
+      });
+    }
+    else{
+      setState(() {
+        name = '';
+        reg = '';
+      });
+    }
+
+  }
+
+  // For non neet
+  dbname1() async{
+    final users = FirebaseAuth.instance.currentUser;
+    final uid = users?.uid;
+    final getname = FirebaseFirestore.instance.collection('users').doc(uid);
 
     final getusers = await getname.get();
 

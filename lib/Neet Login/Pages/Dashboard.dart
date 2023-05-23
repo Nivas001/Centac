@@ -5,10 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:login/Home/home_bottom.dart';
 import 'package:login/Home/login.dart';
 import 'package:login/Neet%20Login/Pages/Extras/Verification.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:wiredash/wiredash.dart';
+import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'dart:convert';
+
+_launchURLBrowser() async {
+  const url = 'https://www.centacpuducherry.in/';
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
 class Dash_neet extends StatefulWidget {
   const Dash_neet({Key? key}) : super(key: key);
@@ -17,7 +29,6 @@ class Dash_neet extends StatefulWidget {
 }
 
 class _Dash_neetState extends State<Dash_neet> {
-
   final users = FirebaseAuth.instance.currentUser!.uid.toString();
 
   final userstream =
@@ -81,24 +92,32 @@ class _Dash_neetState extends State<Dash_neet> {
   String name = '';
   String address = '';
   String regno = '';
+  String image = '';
 
   String clg1 = '';
-  String clggg ='';
-  String clg2 = '';
   String lastdate = '';
   String course = '';
   String status = '';
   int round = 0;
 
+  String r2 = '';
+  int widthfail = 120;
+
   String academy = '';
   String residence = '';
   String caste = '';
   String category = '';
+  String rur_urb = '';
   var verifistatus = '';
   Color valid = Colors.green;
 
+  String NoClg = '';
+  String NoVerificatio = '';
+  bool visibility1 = true;
+  bool visibility2 = false;
+  bool visibility3 = false;
+  bool visibility4 = false;
 
-  
   bool clicked = false;
 
   dbtest() async {
@@ -115,6 +134,7 @@ class _Dash_neetState extends State<Dash_neet> {
       setState(() {
         name = data!['Name'] ?? '';
         regno = data['RegNo'];
+        image = data['Image'];
         print('Name Check : $name');
       });
     } else {
@@ -144,49 +164,69 @@ class _Dash_neetState extends State<Dash_neet> {
         residence = data['Residence'];
         caste = data['Caste'];
         category = data['Category'];
+        rur_urb = data['Rural'];
         print(' Academy : $academy');
         print('Residence : $residence');
         print('Caste : $caste');
         print('Category : $category');
 
-        if (academy == 'Success' && residence == 'Success' && caste == 'Success' && category == 'Success') {
+        if (academy == 'Success' &&
+            residence == 'Success' &&
+            caste == 'Success' &&
+            category == 'Success' &&
+            rur_urb == 'Success') {
           verifistatus = 'All Documents are verified';
           valid = Colors.green;
-        }
-        else {
+          widthfail = 120;
+        } else {
           verifistatus = 'Verification status need to be pending';
           valid = Colors.red;
+          visibility1 = false;
+          widthfail = 74;
+          visibility4 = true;
+          NoVerificatio = 'Please upload/change your Pending files which are incomplete in your Verification status';
+          print(widthfail);
         }
-
       });
     } else {
       academy = '';
       residence = '';
       caste = '';
       category = '';
+      print(widthfail);
     }
   }
 
-  dbAllot() async{
+  dbAllot() async {
     final user1 = FirebaseAuth.instance.currentUser;
     final uid = user1?.uid;
     final allot = FirebaseFirestore.instance.collection('Allotment').doc(uid);
 
     final documentSnapshot = await allot.get();
 
-    if(documentSnapshot.exists){
+    if (documentSnapshot.exists) {
       final data = documentSnapshot.data();
+
       print(data);
       setState(() {
-        round = data!['Round'] ??'';
+        round = data!['Round'] ?? '';
         print(round);
+
         clg1 = data['Clgname'];
-        course = data['Course'];
-        lastdate = data['Lastdate'];
-        status = data['Status'];
+        if (clg1 == '') {
+          NoClg = 'No Course have been alloted';
+          visibility1 = false;
+          visibility2 = true;
+          visibility3 = true;
+        }
+        if (clg1 != '') {
+          course = data['Course'];
+          lastdate = data['Lastdate'];
+          status = data['Status'];
+          visibility3 = true;
+        }
       });
     }
-    
   }
 
   Future<void> _signOut() async {
@@ -204,10 +244,8 @@ class _Dash_neetState extends State<Dash_neet> {
 
   @override
   Widget build(BuildContext context) {
-
     double phonewidth = MediaQuery.of(context).size.width;
     print(phonewidth);
-
 
     return WillPopScope(
       onWillPop: () async {
@@ -221,11 +259,12 @@ class _Dash_neetState extends State<Dash_neet> {
             'DASHBOARD ',
             style: TextStyle(
               fontFamily: 'Poppins',
-              fontSize: 16.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.bold,
-              letterSpacing: 3.0,
+              letterSpacing: 6.0,
             ),
           ),
+          toolbarHeight: 90,
           elevation: 5.0,
         ),
         drawer: Drawer(
@@ -257,8 +296,12 @@ class _Dash_neetState extends State<Dash_neet> {
                     setState(() {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => Verification()));
+                          PageTransition(
+                              child: Verification(),
+                              duration: Duration(milliseconds: 300),
+                              type: PageTransitionType.bottomToTop,
+                              childCurrent: this.widget));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => Verification()));
                     });
                   },
                 ),
@@ -342,7 +385,9 @@ class _Dash_neetState extends State<Dash_neet> {
                       fontSize: 16.0,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Wiredash.of(context).show(inheritMaterialTheme: true);
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.home_outlined),
@@ -378,33 +423,50 @@ class _Dash_neetState extends State<Dash_neet> {
             //     //return Text('Name : $name');
             //   },
             // ),
+
             SizedBox(
-              height: 5.0,
+              height: 25.0,
             ),
             Container(
-              width: phonewidth-80,
+              width: phonewidth - widthfail ,
               padding: EdgeInsets.only(left: 10.0, right: 10.0),
               //color: Colors.grey,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.purple),
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Name : $name',
-                    style: TextStyle(fontFamily: 'Poppins'),
-                  ),
-                  Text(
-                    'Reg. No : $regno',
-                    style: TextStyle(fontFamily: 'Poppins'),
-                  ),
-                  Visibility(
-                    visible: true,
-                    child: Text(
-                      '$verifistatus',
-                      style: TextStyle(color:valid,fontFamily: 'Poppins',fontWeight: FontWeight.bold),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      '$image',
                     ),
+                    radius: 24,
+                  ),
+                  SizedBox(width: 15),
+                  Column(
+                    children: [
+                      Text(
+                        'Name : $name',
+                        style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Reg. No : $regno',
+                        style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold),
+                      ),
+                      Visibility(
+                        visible: true,
+                        child: Text(
+                          '$verifistatus',
+                          style: TextStyle(
+                              color: valid,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -431,77 +493,155 @@ class _Dash_neetState extends State<Dash_neet> {
             const SizedBox(
               height: 20.0,
             ),
-            Center(
-              child: SingleChildScrollView(
-                //scrollDirection: Axis.horizontal,
-                child: DataTable(
-
-                  dividerThickness: 2.0,
-                  columnSpacing: 15,
-                  dataTextStyle: const TextStyle(
-                    fontFamily: 'SF-Compact',
+            Visibility(
+              visible: visibility2,
+              child: Text(
+                '$NoClg',
+                style: TextStyle(fontFamily: 'SF Pro'),
+              ),
+            ),
+            Visibility(
+              visible : visibility4,
+              child: Card(
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: BorderSide(color: Colors.red, width: 5),
+                      right: BorderSide(color: Colors.red, width: 5),
+                    ),
+                   // borderRadius: BorderRadius.circular(20),
                   ),
-                  columns: [
-                    DataColumn(
-                      label: Text(
-                        'College Name',
-                        textAlign: TextAlign.center,
-                        style: SF(),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Course allotted',
-                        style: SF(),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Last date',
-                        textAlign: TextAlign.center,
-                        style: SF(),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Status',
-                        textAlign: TextAlign.center,
-                        style: SF(),
-                      ),
-                    ),
-                  ],
-                  rows: [
-                    DataRow(
-                     cells: [
-                       DataCell(
-                         Text('$clg1',style: TextStyle(color: Colors.black),),
-                       ),
-                       DataCell(
-                         Text('$course',style: TextStyle(color: Colors.black),),
-                       ),
-                       DataCell(
-                         Text('$lastdate',style: TextStyle(color: Colors.black),),
-                       ),
-                       DataCell(
-                         Text('$status',style: TextStyle(color: Colors.black),),
-                       ),
-                     ]
-                    ),
-                  ],
+                  child: Visibility(
+
+                      child: Text('$NoVerificatio',style: TextStyle(fontFamily: 'SF Pro',color: Colors.black),)
+                  ),
                 ),
               ),
             ),
+            Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Visibility(
+                  visible: visibility1,
+                  child: DataTable(
+                    dividerThickness: 2.0,
+                    columnSpacing: 15,
+                    dataTextStyle: const TextStyle(
+                      fontFamily: 'SF-Compact',
+                    ),
+                    columns: [
+                      DataColumn(
+                        label: Text(
+                          'College Name',
+                          textAlign: TextAlign.center,
+                          style: SF(),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Course allotted',
+                          style: SF(),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Last date',
+                          textAlign: TextAlign.center,
+                          style: SF(),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Status',
+                          textAlign: TextAlign.center,
+                          style: SF(),
+                        ),
+                      ),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(
+                          Text(
+                            '$clg1',
+                            style: ColorBlack(),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            '$course',
+                            style: ColorBlack(),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            '$lastdate',
+                            style: ColorBlack(),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            '$status',
+                            style: ColorBlack(),
+                          ),
+                        ),
+                      ]),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+
+            Visibility(
+              visible: visibility3,
+              child: GestureDetector(
+                onTap: _launchURLBrowser,
+                child: Card(
+                  shadowColor: Colors.black,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    //alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(color: Colors.deepPurple, width: 5),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'If you want to continue for the next round',
+                          style: TextStyle(fontFamily: 'Poppins'),
+                        ),
+                        Text(
+                          'Please click here to select for next round Preference',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
+  TextStyle ColorBlack() => TextStyle(color: Colors.black,fontWeight: FontWeight.bold);
+
   // for making the text sf and making the weight bold
   TextStyle SF_bold() {
     return TextStyle(
       fontFamily: 'SF-Compact',
       fontWeight: FontWeight.bold,
+      fontSize: 18,
     );
   }
 

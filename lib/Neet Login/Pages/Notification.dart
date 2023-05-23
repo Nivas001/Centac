@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:http/http.dart';
@@ -20,16 +19,13 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
-
   void getData() async {
     Response response = await get(
       Uri.parse(
           'https://centac-b36d6-default-rtdb.asia-southeast1.firebasedatabase.app/.json'),
     );
-    if(response.statusCode == 200)
-    {
+    if (response.statusCode == 200) {
       String data = response.body;
-
 
       var info1 = jsonDecode(data)['Links'][1];
       var info2 = jsonDecode(data)['Links'][2];
@@ -44,10 +40,7 @@ class _NotificationsState extends State<Notifications> {
       list5 = info5;
 
       print(info1);
-
-    }
-    else
-    {
+    } else {
       print(response.statusCode);
     }
   }
@@ -60,6 +53,7 @@ class _NotificationsState extends State<Notifications> {
       throw 'Could not launch $url';
     }
   }
+
   _launchNeet1() async {
     String url = list3;
     if (await canLaunchUrlString(url)) {
@@ -86,78 +80,91 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-        title: Text('Notifications',style: TextStyle(color: Colors.black, fontFamily: 'Cinzel', fontWeight: FontWeight.bold),),
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Container(
-        height: double.infinity,
-        child: Column(
-          children: [
-            SizedBox(height: 10.0,),
-
-            FirebaseAnimatedList(
-                shrinkWrap: true,
-                query: dbref2,
-                itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
-                  return Card(
-                    child: ClipPath(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                              left: BorderSide(color: Colors.greenAccent,width: 5)
-                          ),
-                        ),
-                        child: ListTile(
-                          title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
-                          onTap: _launchNeet,
-                        ),
-                      ),
-                      clipper: ClipperCircleBorder(),
-                    ),
-                  );
-
-                }
-            ),
-            FirebaseAnimatedList(
-                shrinkWrap: true,
-                query: dbref3,
-                itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
-                  return Card(
-                    child: ClipPath(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                              left: BorderSide(color: Colors.greenAccent,width: 5)
-                          ),
-                        ),
-                        child: ListTile(
-                          title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'SFPro'),),
-                          onTap: _launchNeet1,
-                        ),
-                      ),
-                      clipper: ClipperCircleBorder(),
-                    ),
-                  );
-
-                }
-            ),
-
-
-
-          ],
+        appBar: AppBar(
+          title: Text(
+            'Notifications',
+            style: TextStyle(
+                color: Color(0xFFFFFFFF),
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                letterSpacing: 4.0),
+          ),
+          backgroundColor: Color(0xFF8294C4),
+          centerTitle: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            )
+          ),
+          toolbarHeight: 100,
+          elevation: 0,
         ),
-      )
-    );
+        body: Container(
+          height: double.infinity,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10.0,
+              ),
+              FirebaseAnimatedList(
+                  shrinkWrap: true,
+                  query: dbref2,
+                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                      Animation<double> animation, int index) {
+                    return Card(
+                      child: ClipPath(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    color: Color(0xFF8294C4), width: 5)),
+                          ),
+                          child: ListTile(
+                            title: Text(
+                              snapshot.child('1').value.toString(),
+                              style: TextStyle(fontFamily: 'SFPro'),
+                            ),
+                            onTap: _launchNeet,
+                          ),
+                        ),
+                        clipper: ClipperCircleBorder(),
+                      ),
+                    );
+                  }),
+              FirebaseAnimatedList(
+                  shrinkWrap: true,
+                  query: dbref3,
+                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                      Animation<double> animation, int index) {
+                    return Card(
+                      child: ClipPath(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    color: Color(0xFF8294C4), width: 5)),
+                          ),
+                          child: ListTile(
+                            title: Text(
+                              snapshot.child('1').value.toString(),
+                              style: TextStyle(fontFamily: 'SFPro'),
+                            ),
+                            onTap: _launchNeet1,
+                          ),
+                        ),
+                        clipper: ClipperCircleBorder(),
+                      ),
+                    );
+                  }),
+            ],
+          ),
+        ));
   }
+
   ShapeBorderClipper ClipperCircleBorder() {
     return ShapeBorderClipper(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(3)));
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)));
   }
 }

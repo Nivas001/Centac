@@ -1,7 +1,10 @@
+
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login/Neet%20Login/Pages/Extras/ViewMarks.dart';
+import 'package:page_transition/page_transition.dart';
 import '../../main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -40,6 +43,7 @@ class _User1State extends State<User1> {
   String religion = '';
   String image = '';
   String father_name = '';
+  String area = '';
 
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -66,6 +70,7 @@ class _User1State extends State<User1> {
         phone = data['Phone'];
         image = data['Image'];
         father_name = data['Fname'];
+        area = data['Region'];
       });
     } else {
       setState(() {
@@ -82,6 +87,7 @@ class _User1State extends State<User1> {
         phone = 0;
         image = '';
         father_name = '';
+        area = '';
       });
     }
   }
@@ -296,6 +302,24 @@ class _User1State extends State<User1> {
                       decoration: BoxDecoration(
                         border: Border(
                             left:
+                            BorderSide(color: Colors.deepPurple, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.favorite_rounded),
+                        title: Text('Urban / Rural', style: BoldPoppins()),
+                        subtitle: Text('$area', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
                                 BorderSide(color: Colors.pinkAccent, width: 6)),
                       ),
                       child: ListTile(
@@ -361,7 +385,8 @@ class _User1State extends State<User1> {
                         trailing: Icon(Icons.ads_click_rounded),
                         onTap: (){
                           setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewMarks()));
+                            Navigator.push(context, PageTransition(child: ViewMarks(), duration : Duration(milliseconds: 340),type: PageTransitionType.bottomToTop));
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> ViewMarks()));
                           });
                         },
                       ),

@@ -6,6 +6,8 @@ import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/Non-Neet%20Login/NonBottom.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class LoginNon extends StatefulWidget {
   const LoginNon({Key? key}) : super(key: key);
@@ -41,7 +43,7 @@ class _LoginNonState extends State<LoginNon> {
                 'UG NON-NEET!!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Gothvetica',
+                  fontFamily: 'Poppins',
                   fontSize: 22.0,
                   color: Color(0xFF555555),
                 ),
@@ -53,7 +55,7 @@ class _LoginNonState extends State<LoginNon> {
                 'Enter the correct credentials.',
                 style: TextStyle(
                   color: Color(0xFF5F6769),
-                  fontFamily: 'Gothvetica',
+                  fontFamily: 'Poppins',
                 ),
               ),
             ),
@@ -206,12 +208,32 @@ class _LoginNonState extends State<LoginNon> {
             SizedBox(
               height: 20.0,
             ),
-            Text(
-              '$errormsg',
-              style: TextStyle(
-                fontFamily: 'Gothvetica',
-                fontSize: 16.0,
-                color: Color(0xFF555555),
+            // Text(
+            //   '$errormsg',
+            //   style: TextStyle(
+            //     fontFamily: 'Gothvetica',
+            //     fontSize: 16.0,
+            //     color: Color(0xFF555555),
+            //   ),
+            // ),
+            InkWell(
+              onTap: (){
+                const url = 'https://centacpuducherry.in/ugdegree_2023/registration.html';
+                launchUrlString(url);
+              },
+              child: GestureDetector(
+                child: Card(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(color: Color(0xFF555555),width: 5),
+                        right: BorderSide(color: Color(0xFF555555),width: 5),
+                      )
+                    ),
+                    child: Text('For Registration, Click here',style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                  ),
+                ),
               ),
             )
           ],

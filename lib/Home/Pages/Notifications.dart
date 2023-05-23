@@ -18,6 +18,7 @@ late String list2 = '';
 late String list3 = '';
 late String list4 = '';
 late String list5 = '';
+late String list6 = '';
 
 class Home_notification extends StatefulWidget {
   const Home_notification({Key? key}) : super(key: key);
@@ -47,12 +48,14 @@ class _Home_notificationState extends State<Home_notification> {
       var info3 = jsonDecode(data)['Links'][3];
       var info4 = jsonDecode(data)['Links'][4];
       var info5 = jsonDecode(data)['Links'][5];
+      var info6 = jsonDecode(data)['Links'][6];
 
       list1 = info1;
       list2 = info2;
       list3 = info3;
       list4 = info4;
       list5 = info5;
+      list6 = info6;
 
       print(info1);
       print(data);
@@ -106,6 +109,15 @@ class _Home_notificationState extends State<Home_notification> {
     }
   }
 
+  _launchAdmission() async {
+    String url = list6;
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -118,6 +130,7 @@ class _Home_notificationState extends State<Home_notification> {
   Query dbref3 = FirebaseDatabase.instance.ref().child('NeetFinal');
   Query dbref4 = FirebaseDatabase.instance.ref().child('NonNeet');
   Query dbref5 = FirebaseDatabase.instance.ref().child('Note');
+  Query dbref6 = FirebaseDatabase.instance.ref().child('Admission');
   Query dblink = FirebaseDatabase.instance.ref().child('Links');
 
   @override
@@ -230,6 +243,7 @@ class _Home_notificationState extends State<Home_notification> {
             child: Column(
               children: [
                 SizedBox(height: 10.0,),
+
                 FirebaseAnimatedList(
                   shrinkWrap: true,
                   query: dbref1,
@@ -353,6 +367,30 @@ class _Home_notificationState extends State<Home_notification> {
                               ),
                             ),
                             clipper: ClipperCircleBorder()
+                        ),
+                      );
+
+                    }
+                ),
+                FirebaseAnimatedList(
+                    shrinkWrap: true,
+                    query: dbref6,
+                    itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index){
+                      return Card(
+                        child: ClipPath(
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  left: BorderSide(color: Colors.red,width: 5)
+                              ),
+                            ),
+                            child: ListTile(
+                              title: Text(snapshot.child('1').value.toString(),style: TextStyle(fontFamily: 'Poppins'),),
+                              onTap: _launchAdmission,
+                            ),
+                          ),
+                          clipper: ClipperCircleBorder(),
                         ),
                       );
 

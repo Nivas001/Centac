@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login/Neet%20Login/Pages/Extras/ViewMarks.dart';
 import 'package:login/Non-Neet%20Login/Pages/Extras/NonViewMarks.dart';
 import '../../../main.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -43,6 +44,7 @@ class _NonUser1State extends State<NonUser1> {
   String religion = '';
   String image = '';
   String father_name = '';
+  String area = '';
 
   dbtest() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -69,6 +71,7 @@ class _NonUser1State extends State<NonUser1> {
         phone = data['Phone'];
         image = data['Image'];
         father_name = data['Fname'];
+        area = data['Region'];
       });
     } else {
       setState(() {
@@ -85,6 +88,7 @@ class _NonUser1State extends State<NonUser1> {
         phone = 0;
         image = '';
         father_name = '';
+        area = '';
       });
     }
   }
@@ -299,6 +303,24 @@ class _NonUser1State extends State<NonUser1> {
                       decoration: BoxDecoration(
                         border: Border(
                             left:
+                            BorderSide(color: Colors.deepPurple, width: 6)),
+                      ),
+                      child: ListTile(
+                        leading: Icon(Icons.wb_shade),
+                        title: Text('Urban / Rural', style: BoldPoppins()),
+                        subtitle: Text('$area', style: RegularPoppins()),
+                      ),
+                    ),
+                    clipper: ClipperCircleBorder(),
+                  ),
+                ),
+                Card(
+                  child: ClipPath(
+                    child: Container(
+                      padding: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                            left:
                             BorderSide(color: Colors.pinkAccent, width: 6)),
                       ),
                       child: ListTile(
@@ -364,7 +386,8 @@ class _NonUser1State extends State<NonUser1> {
                         trailing: Icon(Icons.ads_click_rounded),
                         onTap: (){
                           setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> NonViewMarks()));
+                            Navigator.push(context, PageTransition(child: NonViewMarks(), duration : Duration(milliseconds: 500),type: PageTransitionType.bottomToTop));
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> NonViewMarks()));
                           });
                         },
                       ),

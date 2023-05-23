@@ -35,7 +35,7 @@ class _nonbottomState extends State<nonbottom> {
     Dash_nonneet(),
     NonNotifications(),
     NonUser1(),
-    NonSettings1(),
+    //NonSettings1(),
   ];
 
   List <Color> colours = [
@@ -133,10 +133,10 @@ class _nonbottomState extends State<nonbottom> {
                   icon: Icons.person,
                   text: 'User',
                 ),
-                GButton(
-                  icon: Icons.settings,
-                  text: 'Settings',
-                ),
+                // GButton(
+                //   icon: Icons.settings,
+                //   text: 'Settings',
+                // ),
               ],
               onTabChange: (index)
               {
