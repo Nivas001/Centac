@@ -93,11 +93,14 @@ class _NotificationsState extends State<Notifications> {
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
+              bottom: Radius.elliptical(
+                MediaQuery.of(context).size.width , 100.0
+              ),
             )
           ),
-          toolbarHeight: 100,
+          toolbarHeight: 150,
           elevation: 0,
+          shadowColor: Color(0xFF8294C4),
         ),
         body: Container(
           height: double.infinity,
